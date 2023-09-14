@@ -24,7 +24,6 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install node modules
-        working-directory: ./events
         run: npm i
       - name: Run eslint
         run: npm run lint
