@@ -27,6 +27,8 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - name: Checkout the repo 
+        uses: actions/checkout@v4
       - name: Install node modules
         run: npm i
       - name: Run eslint
