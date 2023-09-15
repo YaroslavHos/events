@@ -11,6 +11,9 @@ jobs:
         with:
           repository: events
           persist-credentials: false
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 19
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
