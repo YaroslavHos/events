@@ -1,22 +1,41 @@
 {
     "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "rules": {
+        "@typescript-eslint/indent": ["warn", 2],
+        "object-curly-spacing": ["warn", "always"],
+        "object-curly-newline": ["warn", {"multiline": true, "consistent": true}],
+        "quotes": [2, "single", "avoid-escape"],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-namespace": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "@typescript-eslint/no-unused-vars": ["warn", { "ignoreRestSiblings": true }]
+    },
     "env": {
         "node": true
     },
-    "extends": [
-        "standard-with-typescript"
-    ],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "brace-style": [2, "1tbs"],
-        "comma-style": [2, "last"],
-        "default-case": 2,
-        "func-style": [2, "declaration"]
     }
 }
+
