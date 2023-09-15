@@ -10,6 +10,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3.0.0
         with:
+          path: main
           persist-credentials: false
       - name: Cache node modules
         id: cache-npm
@@ -25,7 +26,6 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install node modules
-        working-directory: ~/
         run: npm i
       - name: Run eslint
         run: npm run lint
