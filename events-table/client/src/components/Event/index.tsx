@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from "react";
 import useStyles from "./styles";
-import Axios from 'axios';
 import {ISingleEvent} from "../../store/events/types";
-import Button from "@mui/material/Button";
-import styled from "@emotion/styled";
 import Switch from "@mui/material/Switch";
 import {Box, FormControlLabel, Grid} from "@mui/material";
 import {useDispatch} from "react-redux";
