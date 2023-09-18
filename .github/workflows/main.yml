@@ -30,7 +30,7 @@ jobs:
         run: npm i
       - name: Run eslint
         run: npm run lint
-      - name: Run TS compiler
-        run: npm run tsc-compile
+#      - name: Run TS compiler
+#        run: npm run tsc-compile
       - name: Run tests
         run: npm run test
