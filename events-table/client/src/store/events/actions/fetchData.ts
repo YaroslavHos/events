@@ -18,10 +18,10 @@ export const fetchEventsAction = () => {
                 .get(
                     url
                 )
-                .then(response => {
+                .then((response: any) => {
                     dispatch(fetchDataSuccess(response.data));
                 })
-                .catch(error => {
+                .catch((error: any) => {
                     dispatch(fetchDataError(error));
                 });
         };
@@ -36,9 +36,9 @@ export const updateDataAction = (action: any) => {
         dispatch(ignoreReportEventRequest(action))
             axios.put(url, {
                 [path]: val,
-            }).then(response => {
+            }).then((response: any) => {
                 dispatch(ignoreReportEventSuccess(response.data));
-            }).catch(error => {
+            }).catch((error: any) => {
                 dispatch(ignoreReportEventError(error));
             });
         }
