@@ -26,7 +26,7 @@ const EventsTable: React.FC<IEventsTable> = (props) => {
     const ignored = irData(list, 'ignored')
     const reported = irData(list, 'reported')
     const classes = useStyles();
-    return ( <div className={classes.tableContainer}>
+    return ( <div data-testid='form-testId' className={classes.tableContainer}>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
