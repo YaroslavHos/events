@@ -6,6 +6,8 @@
     "test": "cd events-table/client && npm test"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.3",
+    "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "eslint": "^8.48.0",
     "eslint-config-standard-with-typescript": "^39.0.0",
