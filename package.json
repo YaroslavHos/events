@@ -3,7 +3,9 @@
     "postinstall": "(cd events-table/client && npm install); (cd events-table/server && npm install)",
     "lint": "eslint . --ext .ts,.tsx",
     "tsc-compile": "tsc --noemit --project tsconfig.checkAll.json",
-    "test": "cd events-table/client && npm test"
+    "test": "cd events-table/client && npm test",
+    "server": "cd events-table/server && npm run start",
+    "client": "cd events-table/client && npm run start"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.3",
