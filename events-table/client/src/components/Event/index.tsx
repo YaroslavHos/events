@@ -2,7 +2,10 @@ import React, {useEffect, useState} from "react";
 import useStyles from "./styles";
 import {ISingleEvent} from "../../store/events/types";
 import Switch from "@mui/material/Switch";
-import {Box, FormControlLabel, Grid} from "@mui/material";
+import {Box, Button, FormControlLabel, Grid} from "@mui/material";
+import Stack from '@mui/material/Stack';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CreateIcon from '@mui/icons-material/Create';
 import {useDispatch} from "react-redux";
 import {updateDataAction} from "../../store/events/actions/fetchData";
 // export interface IEventData {
@@ -89,6 +92,12 @@ const Event: React.FC<ISingleEvent> = (props) => {
                                 control={<Switch size='small' onChange={reportEvent} checked={Boolean(reportedEvent)}/>}
                                 label="Report"
                             />
+                        </div>
+                        <div className={classes.eventButtonsContainer}>
+                            <Stack spacing={2} direction="row" justifyContent="flex-end">
+                                <Button variant="outlined" color="warning" startIcon={<CreateIcon />}>Modify</Button>
+                                <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>Delete</Button>
+                            </Stack>
                         </div>
                     </div>
                 </Grid>

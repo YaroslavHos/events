@@ -22,4 +22,8 @@ export default createUseStyles( {
         textAlign: 'left',
         padding: '5px 0',
     },
+    eventButtonsContainer: {
+        width: '100%',
+        textAlign: 'right'
+    }
 })
