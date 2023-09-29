@@ -4,10 +4,13 @@ import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Tex
 
 const EventForm = () => {
     const [eventName, setEventName] = useState('');
-    const [eventSeverity, setEventSeverity] = useState('');
+    const [eventSeverity, setEventSeverity] = useState('High');
+    const [error, setError] = React.useState(false);
     const timestamp = new Date().getTime() / 1000;
 
-    const submitEvent = () => {
+    const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(eventName, eventSeverity, 'test')
         Axios.post("http://localhost:3001/insert", {
             eventName: eventName,
             eventSeverity: eventSeverity,
@@ -16,13 +19,15 @@ const EventForm = () => {
             alert('successful insert');
         })
     }
-    // const setEventName = (e: React.BaseSyntheticEvent) => {
-    //
-    // }
+    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEventSeverity((event.target as HTMLInputElement).value);
+        setError(false);
+    };
+
     return (
         <div className="form">
             <form onSubmit={submitEvent}>
-            <FormControl>
+            <FormControl sx={{ m: 3 }} error={error} variant="standard">
                 <FormLabel id="event-name">Event name</FormLabel>
                 <TextField
                     type="text"
@@ -37,6 +42,7 @@ const EventForm = () => {
                     aria-labelledby="severity"
                     defaultValue="High"
                     name="eventSeverity"
+                    onChange={handleRadioChange}
                 >
                     <FormControlLabel value="High" control={<Radio />} label="High" />
                     <FormControlLabel value="Mid" control={<Radio />} label="Mid" />
@@ -47,11 +53,6 @@ const EventForm = () => {
                 </Button>
             </FormControl>
             </form>
-            {/*<label>Event name:</label>*/}
-            {/*<input type="text" name="eventName" onChange={(e) => setEventName(e.target.value)}/>*/}
-            {/*<label>Event severity:</label>*/}
-            {/*<input type="text" name="eventSeverity" onChange={(e) => setEventSeverity(e.target.value)}/>*/}
-            {/*<button onClick={submitEvent}>Submit</button>*/}
         </div>
     )
 }
