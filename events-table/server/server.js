@@ -54,6 +54,16 @@ app.put("/reported/:id", (req, res) => {
         console.log(res, "updated")
     })
 })
+
+app.delete("/delete/:id", (req, res) => {
+    const eId = req.params.id;
+    const sqlDelete = 'DELETE FROM event WHERE id=?'
+
+    db.query(sqlDelete, eId, (err, data) => {
+        if (err) return console.log(err)
+        console.log(res, "deleted")
+    })
+})
 const port = 3001;
 const server = createServer(app);
 server.listen(port, () => {
