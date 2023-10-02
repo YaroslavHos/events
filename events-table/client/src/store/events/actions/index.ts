@@ -41,3 +41,24 @@ export const fetchDataError = (error: string) => {
         payload: error
     };
 }
+
+export const deleteDataRequest = (data: any) => {
+    return {
+        type: eventsActionTypes.DELETE_DATA_REQUEST,
+        payload: data
+    };
+}
+
+export const deleteDataRequestSuccess = (data: any) => {
+    return {
+        type: eventsActionTypes.DELETE_DATA_REQUEST_SUCCESS,
+        payload: data
+    };
+}
+
+export const deleteDataRequestError = (error: string) => {
+    return {
+        type: eventsActionTypes.DELETE_DATA_REQUEST_ERROR,
+        payload: error
+    };
+}

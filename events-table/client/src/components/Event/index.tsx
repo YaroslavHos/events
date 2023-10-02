@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import {useDispatch} from "react-redux";
-import {updateDataAction} from "../../store/events/actions/fetchData";
+import {deleteDataAction, updateDataAction} from "../../store/events/actions/fetchData";
 // export interface IEventData {
 //     name: string,
 //     severity: string,
@@ -68,9 +68,8 @@ const Event: React.FC<ISingleEvent> = (props) => {
         setReportedEvent(e.target.checked)
         dispatch<any>(updateDataAction({id: id, reported: !reportedEvent}))
     }
-    const sendMessage = (e: React.BaseSyntheticEvent) => {
-        const id = e.target.id
-        //ws.send(id)
+    const deleteEvent = (e: React.BaseSyntheticEvent) => {
+        dispatch<any>(deleteDataAction({id: id}))
     }
     return (
         <Box>
@@ -96,7 +95,12 @@ const Event: React.FC<ISingleEvent> = (props) => {
                         <div className={classes.eventButtonsContainer}>
                             <Stack spacing={2} direction="row" justifyContent="flex-end">
                                 <Button variant="outlined" color="warning" startIcon={<CreateIcon />}>Modify</Button>
-                                <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>Delete</Button>
+                                <Button
+                                    variant="outlined"
+                                    color="error"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={deleteEvent}
+                                >Delete</Button>
                             </Stack>
                         </div>
                     </div>
