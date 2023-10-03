@@ -36,9 +36,9 @@ app.put("/ignored/:id", (req, res) => {
     const eId = req.params.id;
     const ignored = req.body.ignored;
 
-    const q = 'UPDATE event SET ignored=? WHERE id=?'
+    const sqlUpdate = 'UPDATE event SET ignored=? WHERE id=?'
 
-    db.query(q, [ignored, eId], (err, data) => {
+    db.query(sqlUpdate, [ignored, eId], (err, result) => {
         if (err) return console.log(err)
         console.log(res, "updated")
     })
@@ -47,11 +47,23 @@ app.put("/reported/:id", (req, res) => {
     const eId = req.params.id;
     const reported = req.body.reported;
 
-    const q = 'UPDATE event SET reported=? WHERE id=?'
+    const sqlUpdate = 'UPDATE event SET reported=? WHERE id=?'
 
-    db.query(q, [reported, eId], (err, data) => {
+    db.query(sqlUpdate, [reported, eId], (err, result) => {
         if (err) return console.log(err)
         console.log(res, "updated")
+    })
+})
+
+app.put("/update/:id", (req, res) => {
+    const eId = req.params.id;
+    const eventName = req.body.eventName;
+    const eventSeverity = req.body.eventSeverity;
+    const timestamp = req.body.timestamp;
+    const sqlUpdate = "UPDATE event SET (name, severity, timestamp) VALUES (?,?,?) WHERE id=?"
+    db.query(sqlUpdate, [eventName, eventSeverity, timestamp, eId], (err, result) => {
+        if (err) return console.log(err)
+        console.log(result, 'result')
     })
 })
 

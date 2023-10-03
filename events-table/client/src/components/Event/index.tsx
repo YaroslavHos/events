@@ -2,12 +2,14 @@ import React, {useEffect, useState} from "react";
 import useStyles from "./styles";
 import {ISingleEvent} from "../../store/events/types";
 import Switch from "@mui/material/Switch";
-import {Box, Button, FormControlLabel, Grid} from "@mui/material";
+import {Box, Button, FormControlLabel, Grid, Modal} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import {useDispatch} from "react-redux";
-import {deleteDataAction, updateDataAction} from "../../store/events/actions/fetchData";
+import {deleteDataAction, ignoreReportDataAction, updateDataAction} from "../../store/events/actions/fetchData";
+import Typography from "@mui/material/Typography";
+import EventForm from "../EventForm";
 // export interface IEventData {
 //     name: string,
 //     severity: string,
@@ -27,6 +29,18 @@ import {deleteDataAction, updateDataAction} from "../../store/events/actions/fet
 //     reported: boolean
 // }
 
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
 const Event: React.FC<ISingleEvent> = (props) => {
     const { name, id, ignored, reported, timestamp, severity } = props;
     const [ignoredEvent, setIgnoredEvent] = useState(ignored)
@@ -34,6 +48,9 @@ const Event: React.FC<ISingleEvent> = (props) => {
     const dispatch = useDispatch();
     const classes = useStyles()
 
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
 
     //const [someData, setSomeData] = useState<any>()
@@ -62,14 +79,17 @@ const Event: React.FC<ISingleEvent> = (props) => {
     // }
     const ignoreEvent = (e: React.BaseSyntheticEvent) => {
         setIgnoredEvent(e.target.checked)
-        dispatch<any>(updateDataAction({id: id, ignored: !ignoredEvent}))
+        dispatch<any>(ignoreReportDataAction({id: id, ignored: !ignoredEvent}))
     }
     const reportEvent = (e: React.BaseSyntheticEvent) => {
         setReportedEvent(e.target.checked)
-        dispatch<any>(updateDataAction({id: id, reported: !reportedEvent}))
+        dispatch<any>(ignoreReportDataAction({id: id, reported: !reportedEvent}))
     }
     const deleteEvent = (e: React.BaseSyntheticEvent) => {
         dispatch<any>(deleteDataAction({id: id}))
+    }
+    const updateEvent = (e: React.BaseSyntheticEvent) => {
+        console.log(e)
     }
     return (
         <Box>
@@ -94,7 +114,24 @@ const Event: React.FC<ISingleEvent> = (props) => {
                         </div>
                         <div className={classes.eventButtonsContainer}>
                             <Stack spacing={2} direction="row" justifyContent="flex-end">
-                                <Button variant="outlined" color="warning" startIcon={<CreateIcon />}>Modify</Button>
+                                <div>
+                                    <Button
+                                        variant="outlined"
+                                        color="warning"
+                                        startIcon={<CreateIcon />}
+                                        onClick={handleOpen}
+                                    >Modify</Button>
+                                    <Modal
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="modal-modal-title"
+                                        aria-describedby="modal-modal-description"
+                                    >
+                                        <Box sx={style}>
+                                            <EventForm />
+                                        </Box>
+                                    </Modal>
+                                </div>
                                 <Button
                                     variant="outlined"
                                     color="error"
