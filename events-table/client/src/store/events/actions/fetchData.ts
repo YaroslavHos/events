@@ -8,7 +8,7 @@ import {
     ignoreReportEventError,
     deleteDataRequest,
     deleteDataRequestSuccess,
-    deleteDataRequestError,
+    deleteDataRequestError, updateDataRequest, updateDataRequestSuccess, updateDataRequestError,
 } from "./index";
 const ROOT_URL = 'http://localhost:3001';
 
@@ -30,7 +30,7 @@ export const fetchEventsAction = () => {
         };
 }
 
-export const updateDataAction = (action: any) => {
+export const ignoreReportDataAction = (action: any) => {
     const {id, ignored, reported} = action;
     let path = ignored !== undefined ? 'ignored' : 'reported'
     let val = ignored !== undefined ? ignored : reported
@@ -60,5 +60,23 @@ export const deleteDataAction = (action: any) => {
                 }).catch((error: any) => {
                     dispatch(deleteDataRequestError(error))
             })
+    }
+}
+
+export const updateDataAction = (action: any) => {
+    const {id, name, severity, timestamp} = action;
+    const url = `${ROOT_URL}/update/${id}`;
+
+    return (dispatch: any) => {
+        dispatch(updateDataRequest(action))
+        axios.put(url, {
+            eventName: name,
+            eventSeverity: severity,
+            timestamp: timestamp,
+        }).then((response: any) => {
+            dispatch(updateDataRequestSuccess(response.data));
+        }).catch((error: any) => {
+            dispatch(updateDataRequestError(error));
+        });
     }
 }

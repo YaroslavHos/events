@@ -2,7 +2,12 @@ import React, {useState} from "react";
 import Axios from 'axios';
 import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
 
-const EventForm = () => {
+interface IEventForm {
+    actionType?: string
+}
+
+const EventForm: React.FC<IEventForm> = (props) => {
+    const {actionType = 'insert'} = props
     const [eventName, setEventName] = useState('');
     const [eventSeverity, setEventSeverity] = useState('High');
     const [error, setError] = React.useState(false);
@@ -10,8 +15,8 @@ const EventForm = () => {
 
     const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(eventName, eventSeverity, 'test')
-        Axios.post("http://localhost:3001/insert", {
+        //console.log(eventName, eventSeverity, 'test')
+        Axios.post(`http://localhost:3001/${actionType}`, {
             eventName: eventName,
             eventSeverity: eventSeverity,
             timestamp: timestamp,

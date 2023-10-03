@@ -62,3 +62,24 @@ export const deleteDataRequestError = (error: string) => {
         payload: error
     };
 }
+
+export const updateDataRequest = (data: any) => {
+    return {
+        type: eventsActionTypes.UPDATE_DATA_REQUEST,
+        payload: data
+    };
+}
+
+export const updateDataRequestSuccess = (data: any) => {
+    return {
+        type: eventsActionTypes.UPDATE_DATA_REQUEST_SUCCESS,
+        payload: data
+    };
+}
+
+export const updateDataRequestError = (error: string) => {
+    return {
+        type: eventsActionTypes.UPDATE_DATA_REQUEST_ERROR,
+        payload: error
+    };
+}
