@@ -128,7 +128,7 @@ const Event: React.FC<ISingleEvent> = (props) => {
                                         aria-describedby="modal-modal-description"
                                     >
                                         <Box sx={style}>
-                                            <EventForm />
+                                            <EventForm additionalData={id} actionType='update'/>
                                         </Box>
                                     </Modal>
                                 </div>

@@ -5,7 +5,7 @@ import Axios from 'axios';
 import useStyles from './styles'
 import { useSelector, useDispatch } from 'react-redux';
 import eventsReducer from "../../store/events/reducers";
-import {fetchDataRequest, getEventById} from "../../store/events/actions";
+import {fetchDataRequest} from "../../store/events/actions";
 import {fetchEventsAction} from "../../store/events/actions/fetchData";
 import store from "../../store";
 import event from "../Event";

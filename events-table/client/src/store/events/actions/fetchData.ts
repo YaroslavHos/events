@@ -8,8 +8,14 @@ import {
     ignoreReportEventError,
     deleteDataRequest,
     deleteDataRequestSuccess,
-    deleteDataRequestError, updateDataRequest, updateDataRequestSuccess, updateDataRequestError,
+    deleteDataRequestError,
+    updateDataRequest,
+    updateDataRequestSuccess,
+    updateDataRequestError,
+    insertEventRequest,
+    insertEventSuccess, insertEventError,
 } from "./index";
+import Axios from "axios";
 const ROOT_URL = 'http://localhost:3001';
 
 export const fetchEventsAction = () => {
@@ -28,6 +34,30 @@ export const fetchEventsAction = () => {
                     dispatch(fetchDataError(error));
                 });
         };
+}
+
+export const createEventAction = (action: any) => {
+    const {name, severity, timestamp} = action;
+    const url = `${ROOT_URL}/insert`;
+    return (dispatch: any) => {
+        dispatch(insertEventRequest(action))
+        axios.post(url, {
+            eventName: name,
+            eventSeverity: severity,
+            timestamp: timestamp,
+        }).then((response: any) => {
+            dispatch(insertEventSuccess(response.data));
+        }).catch((error: any) => {
+            dispatch(insertEventError(error));
+        });
+    }
+    // Axios.post(url, {
+    //     eventName: name,
+    //     eventSeverity: severity,
+    //     timestamp: timestamp,
+    // }).then(() => {
+    //     alert('successful insert');
+    // })
 }
 
 export const ignoreReportDataAction = (action: any) => {
