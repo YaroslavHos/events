@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import useStyles from "./styles";
 import {ISingleEvent} from "../../store/events/types";
 import Switch from "@mui/material/Switch";
@@ -7,39 +7,8 @@ import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import {useDispatch} from "react-redux";
-import {deleteDataAction, ignoreReportDataAction, updateDataAction} from "../../store/events/actions/fetchData";
-import Typography from "@mui/material/Typography";
+import {deleteDataAction, ignoreReportDataAction} from "../../store/events/actions/fetchData";
 import EventForm from "../EventForm";
-// export interface IEventData {
-//     name: string,
-//     severity: string,
-//     timestamp: number,
-//     id: number,
-//     ignored: boolean,
-//     reported: boolean
-// }
-
-// export interface IEvent {
-//     //event: IEventData
-//     name: string,
-//     severity: string,
-//     timestamp: number,
-//     id: number,
-//     ignored: boolean,
-//     reported: boolean
-// }
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
 
 const Event: React.FC<ISingleEvent> = (props) => {
     const { name, id, ignored, reported, timestamp, severity } = props;
@@ -52,8 +21,6 @@ const Event: React.FC<ISingleEvent> = (props) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
-    //const [someData, setSomeData] = useState<any>()
     // const openConnection = (e:React.BaseSyntheticEvent) => {
     //     const ws = new WebSocket("ws://localhost:3001/ws");
     //     const id = e.target.id
@@ -69,14 +36,7 @@ const Event: React.FC<ISingleEvent> = (props) => {
     //         console.log(msg)
     //     }
     // }
-    // const ignoreEvent = (e: React.BaseSyntheticEvent) => {
-    //     setIgnoredEvent(!ignoredEvent)
-    //     Axios.put('http://localhost:3001/ignored/'+id, {
-    //         ignored: !ignoredEvent,
-    //     }).then(() => {
-    //         console.log('successful insert');
-    //     })
-    // }
+
     const ignoreEvent = (e: React.BaseSyntheticEvent) => {
         setIgnoredEvent(e.target.checked)
         dispatch<any>(ignoreReportDataAction({id: id, ignored: !ignoredEvent}))
@@ -85,12 +45,10 @@ const Event: React.FC<ISingleEvent> = (props) => {
         setReportedEvent(e.target.checked)
         dispatch<any>(ignoreReportDataAction({id: id, reported: !reportedEvent}))
     }
-    const deleteEvent = (e: React.BaseSyntheticEvent) => {
+    const deleteEvent = () => {
         dispatch<any>(deleteDataAction({id: id}))
     }
-    const updateEvent = (e: React.BaseSyntheticEvent) => {
-        console.log(e)
-    }
+
     return (
         <Box>
             <Grid container spacing={2}>
@@ -127,7 +85,7 @@ const Event: React.FC<ISingleEvent> = (props) => {
                                         aria-labelledby="modal-modal-title"
                                         aria-describedby="modal-modal-description"
                                     >
-                                        <Box sx={style}>
+                                        <Box className={classes.modalBox}>
                                             <EventForm additionalData={id} actionType='update'/>
                                         </Box>
                                     </Modal>
@@ -144,7 +102,6 @@ const Event: React.FC<ISingleEvent> = (props) => {
                 </Grid>
             </Grid>
         </Box>
-
     )
 }
 

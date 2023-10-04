@@ -2,7 +2,6 @@ import {createUseStyles} from "react-jss";
 
 export default createUseStyles( {
     eventContainer: {
-        //width: '100%',
         minHeight: 100,
         border: '1px solid grey',
         borderRadius: 5,
@@ -12,7 +11,6 @@ export default createUseStyles( {
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#f2f2f2',
-        //justifyContent: 'space-evenly'
     },
     eventLine: {
         width: '100%',
@@ -25,5 +23,16 @@ export default createUseStyles( {
     eventButtonsContainer: {
         width: '100%',
         textAlign: 'right'
+    },
+    modalBox: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        backgroundColor: '#fff',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
     }
 })
