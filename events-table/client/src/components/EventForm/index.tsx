@@ -3,6 +3,7 @@ import Axios from 'axios';
 import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
 import {createEventAction, updateDataAction} from "../../store/events/actions/fetchData";
 import {useDispatch} from "react-redux";
+import useStyles from "./styles";
 
 interface IEventForm {
     actionType?: string,
@@ -13,13 +14,15 @@ const EventForm: React.FC<IEventForm> = (props) => {
     const {actionType = 'insert', additionalData} = props
     const [eventName, setEventName] = useState('');
     const [eventSeverity, setEventSeverity] = useState('High');
+    const [description, setDescription] = useState('');
     const [error, setError] = React.useState(false);
     const timestamp = new Date().getTime() / 1000;
     const dispatch = useDispatch();
+    const classes = useStyles()
 
     const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const data = {name: eventName, severity: eventSeverity, timestamp: timestamp,}
+        const data = {name: eventName, severity: eventSeverity, timestamp: timestamp, description: description  }
         if (actionType === 'insert') {
             dispatch<any>(createEventAction(data))
         } else {
@@ -43,9 +46,8 @@ const EventForm: React.FC<IEventForm> = (props) => {
 
     return (
         <div className="form">
-            <form onSubmit={submitEvent}>
-            <FormControl sx={{ m: 3 }} error={error} variant="standard">
-                <FormLabel id="event-name">Event name</FormLabel>
+            <form onSubmit={submitEvent} className={classes.form}>
+            <FormControl sx={{ m: 2 }} error={error} variant="standard" fullWidth>
                 <TextField
                     type="text"
                     aria-labelledby="event-name"
@@ -53,6 +55,17 @@ const EventForm: React.FC<IEventForm> = (props) => {
                     variant="outlined"
                     name="eventName"
                     onChange={(e) => setEventName(e.target.value)}
+                />
+                <TextField
+                    className={classes.textArea}
+                    multiline={true}
+                    minRows={4}
+                    type="text"
+                    aria-labelledby="event-description"
+                    label="Event description"
+                    variant="outlined"
+                    name="description"
+                    onChange={(e) => setDescription(e.target.value)}
                 />
                 <FormLabel id="severity">Severity</FormLabel>
                 <RadioGroup
