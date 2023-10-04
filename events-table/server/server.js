@@ -60,7 +60,7 @@ app.put("/update/:id", (req, res) => {
     const eventName = req.body.eventName;
     const eventSeverity = req.body.eventSeverity;
     const timestamp = req.body.timestamp;
-    const sqlUpdate = "UPDATE event SET (name, severity, timestamp) VALUES (?,?,?) WHERE id=?"
+    const sqlUpdate = "UPDATE event SET name=?, severity=?, timestamp=? WHERE id=?"
     db.query(sqlUpdate, [eventName, eventSeverity, timestamp, eId], (err, result) => {
         if (err) return console.log(err)
         console.log(result, 'result')

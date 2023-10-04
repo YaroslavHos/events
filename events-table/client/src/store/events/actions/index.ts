@@ -1,4 +1,23 @@
 import {eventsActionTypes} from "./types";
+export const insertEventRequest = (data: any) => {
+    return {
+        type: eventsActionTypes.INSERT_EVENT_REQUEST,
+        payload: data
+    }
+}
+export const insertEventSuccess = (data: any) => {
+    return {
+        type: eventsActionTypes.INSERT_EVENT_SUCCESS,
+        payload: data
+    }
+}
+export const insertEventError = (error: string) => {
+    return {
+        type: eventsActionTypes.INSERT_EVENT_ERROR,
+        payload: error
+    }
+}
+
 export const ignoreReportEventRequest = (data: any) => {
     return {
         type: eventsActionTypes.IGNORE_REPORT_EVENT_REQUEST,
@@ -17,12 +36,12 @@ export const ignoreReportEventError = (error: string) => {
         payload: error
     }
 }
-export const getEventById = (data: any) => {
-    return {
-        type: 'GET_EVENTS_BY_ID',
-        payload: data
-    }
-}
+// export const getEventById = (data: any) => {
+//     return {
+//         type: 'GET_EVENTS_BY_ID',
+//         payload: data
+//     }
+// }
 export const fetchDataRequest = () =>    {
     return {
         type: eventsActionTypes.FETCH_DATA_REQUEST
