@@ -8,5 +8,6 @@ export interface ISingleEvent {
     severity: string,
     ignored: boolean,
     reported: boolean,
-    timestamp: number
+    timestamp: number,
+    description: string
 }
