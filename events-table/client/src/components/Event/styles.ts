@@ -7,7 +7,6 @@ export default createUseStyles( {
         color: 'rgb(71, 84, 103)',
         borderRadius: 4,
         padding: 12,
-        margin: 5,
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: 'rgb(249, 250, 251)',

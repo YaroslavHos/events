@@ -53,8 +53,6 @@ const Event: React.FC<ISingleEvent> = (props) => {
     }
 
     return (
-        <Box>
-            <Grid container spacing={2}>
                 <Grid item xs={10}>
                     <div className={classes.eventContainer}>
                         <div className={classes.eventTitle}>{name}</div>
@@ -120,8 +118,6 @@ const Event: React.FC<ISingleEvent> = (props) => {
                         </div>
                     </div>
                 </Grid>
-            </Grid>
-        </Box>
     )
 }
 

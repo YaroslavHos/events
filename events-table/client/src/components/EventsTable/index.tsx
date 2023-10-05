@@ -6,6 +6,7 @@ import CustomTabPanel from "../Tab";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import Grid from "@mui/material/Grid";
 
 interface IEventsTable {
     list: ISingleEvent[]
@@ -36,19 +37,25 @@ const EventsTable: React.FC<IEventsTable> = (props) => {
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={2}>
-                {list.map((item, index) => {
-                    if (item.reported) return <Event key={index} {...item}/>
-                })}
+                    <Grid container spacing={2}>
+                        {list.map((item, index) => {
+                            if (item.reported) return <Event key={index} {...item}/>
+                        })}
+                    </Grid>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                {list.map((item, index) => {
-                    if (item.ignored) return <Event key={index} {...item}/>
-                })}
+                    <Grid container spacing={2}>
+                        {list.map((item, index) => {
+                            if (item.ignored) return <Event key={index} {...item}/>
+                        })}
+                    </Grid>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={0}>
-                {list.map((item, index) => {
-                    if (!item.ignored && !item.reported) return <Event key={index} {...item}/>
-                })}
+                    <Grid container spacing={2}>
+                        {list.map((item, index) => {
+                            if (!item.ignored && !item.reported) return <Event key={index} {...item}/>
+                        })}
+                    </Grid>
                 </CustomTabPanel>
             </Box>
         </div>
