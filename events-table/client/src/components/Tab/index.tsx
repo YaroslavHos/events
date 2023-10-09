@@ -20,7 +20,7 @@ export default function CustomTabPanel(props: ITabPanel) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 1 }}>
+                <Box sx={{ p: 0 }}>
                     {children}
                 </Box>
             )}
