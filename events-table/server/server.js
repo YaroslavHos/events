@@ -22,8 +22,8 @@ app.get("/events", (req, res) => {
     })
 });
 app.post("/insert", (req, res) => {
-    const eventName = req.body.eventName;
-    const eventSeverity = req.body.eventSeverity;
+    const eventName = req.body.name;
+    const eventSeverity = req.body.severity;
     const timestamp = req.body.timestamp;
     const description = req.body.description;
     const sqlInsert = "INSERT INTO event (name, severity, timestamp, description) VALUES (?,?,?,?);"
@@ -58,8 +58,8 @@ app.put("/reported/:id", (req, res) => {
 
 app.put("/update/:id", (req, res) => {
     const eId = req.params.id;
-    const eventName = req.body.eventName;
-    const eventSeverity = req.body.eventSeverity;
+    const eventName = req.body.name;
+    const eventSeverity = req.body.severity;
     const timestamp = req.body.timestamp;
     const description = req.body.description;
     const sqlUpdate = "UPDATE event SET name=?, severity=?, timestamp=?, description=? WHERE id=?"

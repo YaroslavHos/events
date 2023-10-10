@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Axios from 'axios';
 import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
 import {createEventAction, updateDataAction} from "../../store/events/actions/fetchData";
 import {useDispatch} from "react-redux";
@@ -12,35 +11,35 @@ interface IEventForm {
 
 const EventForm: React.FC<IEventForm> = (props) => {
     const {actionType = 'insert', additionalData} = props
-    const [eventName, setEventName] = useState('');
-    const [eventSeverity, setEventSeverity] = useState('High');
-    const [description, setDescription] = useState('');
+    const [formValues, setFormValues] = useState({})
     const [error, setError] = React.useState(false);
-    const timestamp = new Date().getTime() / 1000;
     const dispatch = useDispatch();
     const classes = useStyles()
 
-    const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
+    const submitEvent = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-        const data = {name: eventName, severity: eventSeverity, timestamp: timestamp, description: description  }
+        const timestamp = new Date().getTime() / 1000;
+        let data = formValues
+
+        if(!('severity' in formValues)) {
+            data = {...data, 'severity': e.target.severity.value}
+        }
+
         if (actionType === 'insert') {
-            dispatch<any>(createEventAction(data))
+            dispatch<any>(createEventAction({...data, timestamp: timestamp}))
         } else {
             dispatch<any>(updateDataAction({id: additionalData, ...data}))
         }
-
-
-        //console.log(eventName, eventSeverity, 'test')
-        // Axios.post(`http://localhost:3001/${actionType}`, {
-        //     eventName: eventName,
-        //     eventSeverity: eventSeverity,
-        //     timestamp: timestamp,
-        // }).then(() => {
-        //     alert('successful insert');
-        // })
     }
-    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEventSeverity((event.target as HTMLInputElement).value);
+
+    const onChangeWrapper = (e: React.BaseSyntheticEvent) => {
+        const { value, name } = e.target;
+        setFormValues({...formValues, [name]: value})
+    }
+
+    const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, checked, value } = e.target;
+        checked && setFormValues({...formValues, [name]: value});
         setError(false);
     };
 
@@ -53,8 +52,9 @@ const EventForm: React.FC<IEventForm> = (props) => {
                     aria-labelledby="event-name"
                     label="Event name"
                     variant="outlined"
-                    name="eventName"
-                    onChange={(e) => setEventName(e.target.value)}
+                    name="name"
+                    defaultValue={''}
+                    onChange={onChangeWrapper}
                 />
                 <TextField
                     className={classes.textArea}
@@ -65,13 +65,15 @@ const EventForm: React.FC<IEventForm> = (props) => {
                     label="Event description"
                     variant="outlined"
                     name="description"
-                    onChange={(e) => setDescription(e.target.value)}
+                    defaultValue={''}
+                    onChange={onChangeWrapper}
                 />
                 <FormLabel id="severity">Severity</FormLabel>
                 <RadioGroup
                     aria-labelledby="severity"
                     defaultValue="High"
-                    name="eventSeverity"
+                    value="High"
+                    name="severity"
                     onChange={handleRadioChange}
                 >
                     <FormControlLabel value="High" control={<Radio />} label="High" />

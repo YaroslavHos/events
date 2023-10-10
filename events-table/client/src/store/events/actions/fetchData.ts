@@ -37,14 +37,15 @@ export const fetchEventsAction = () => {
 }
 
 export const createEventAction = (action: any) => {
-    const {name, severity, timestamp} = action;
+    const {name, severity, timestamp, description} = action;
     const url = `${ROOT_URL}/insert`;
     return (dispatch: any) => {
         dispatch(insertEventRequest(action))
         axios.post(url, {
-            eventName: name,
-            eventSeverity: severity,
+            name: name,
+            severity: severity,
             timestamp: timestamp,
+            description: description
         }).then((response: any) => {
             dispatch(insertEventSuccess(response.data));
         }).catch((error: any) => {
@@ -94,15 +95,16 @@ export const deleteDataAction = (action: any) => {
 }
 
 export const updateDataAction = (action: any) => {
-    const {id, name, severity, timestamp} = action;
+    const {id, name, severity, timestamp, description} = action;
     const url = `${ROOT_URL}/update/${id}`;
 
     return (dispatch: any) => {
         dispatch(updateDataRequest(action))
         axios.put(url, {
-            eventName: name,
-            eventSeverity: severity,
+            name: name,
+            severity: severity,
             timestamp: timestamp,
+            description: description
         }).then((response: any) => {
             dispatch(updateDataRequestSuccess(response.data));
         }).catch((error: any) => {
