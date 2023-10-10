@@ -1,29 +1,23 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import EventForm from "../EventForm";
 import EventsTable from "../EventsTable";
-import Axios from 'axios';
 import useStyles from './styles'
 import { useSelector, useDispatch } from 'react-redux';
-import eventsReducer from "../../store/events/reducers";
-import {fetchDataRequest} from "../../store/events/actions";
 import {fetchEventsAction} from "../../store/events/actions/fetchData";
-import store from "../../store";
-import event from "../Event";
 import {IRootState} from "../../store/types";
 import moment from "moment";
-//import {getEventsInfo, getEventsState} from "../../store/selectors";
-//import {fetchEvents} from '../actions/fetchData';
+import {Box, Button, Modal} from "@mui/material";
 
-const ws = new WebSocket("ws://localhost:3001/ws")
+//const ws = new WebSocket("ws://localhost:3001/ws")
 
 const EventsPage = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const eventsList = useSelector((state: IRootState) => state?.events);
-    console.log(eventsList?.isLoading, 'data')
-    // if(eventsList?.isLoading) {
-    //     dispatch<any>(fetchEventsAction())
-    // }
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     React.useEffect(() => {
         dispatch<any>(fetchEventsAction())
     }, [])
@@ -53,19 +47,22 @@ const EventsPage = () => {
     //         setEventsList(response.data)
     //     })
     // }, [])
-    //let diff = moment("20321125", "YYYYMMDD").fromNow();
-    //let diff = moment("20321125", "YYYYMMDD").endOf('day')
-    //console.log(diff, 'diff')
 
 
     const endDate = moment().startOf('day')
     const diff = moment('20321125').diff(endDate, 'days')
 
     return (<div>
+        <Button sx={{ m: 1 }} onClick={handleOpen} variant="outlined">
+            Add Event
+        </Button>
         <div className={classes.countDown}>{diff}</div>
-        <EventForm/>
-        <EventsTable list={eventsList?.data} />
-        {/*<button onClick={sendMessage}>testBTN</button>*/}
+        <Modal open={open} onClose={handleClose}>
+            <Box className={classes.modalBox}>
+                <EventForm />
+            </Box>
+        </Modal>
+        {eventsList && <EventsTable list={eventsList.data} />}
     </div>)
 }
 
