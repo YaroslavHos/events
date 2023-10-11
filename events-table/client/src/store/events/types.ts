@@ -6,8 +6,8 @@ export interface ISingleEvent {
     name: string,
     id: number,
     severity: string,
-    ignored: boolean,
-    reported: boolean,
+    ignored?: boolean,
+    reported?: boolean,
     timestamp: number,
-    description: string
+    description?: string
 }
