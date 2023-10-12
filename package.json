@@ -4,7 +4,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "tsc-compile": "tsc --noemit --project tsconfig.checkAll.json",
     "test": "cd events-table/client && npm test",
-    "server": "cd events-table/server && npm run start",
+    "server": "cd events-table/server && npm run dev",
     "client": "cd events-table/client && npm run start"
   },
   "devDependencies": {
