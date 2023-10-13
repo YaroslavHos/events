@@ -62,7 +62,7 @@ const EventsPage = () => {
                 <EventForm />
             </Box>
         </Modal>
-        {eventsList && <EventsTable list={eventsList.data} />}
+        {eventsList?.data && <EventsTable list={eventsList.data} />}
     </div>)
 }
 

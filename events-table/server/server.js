@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const express = require('express');
 const app = express();
 const axios = require('axios');
@@ -8,33 +9,50 @@ const router = express.Router();
 const { createServer } = require('http');
 const connectDB = require('./connectDB');
 const Events = require('./models/events')
-const {MongoClient} = require('mongodb');
+const { MongoClient } = require('mongodb');
 
-const MONGODB_URI = "mongodb+srv://Evemern:Evemernpassword@cluster1.lierq53.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI = 'mongodb+srv://Evemern:Evemernpassword@cluster1.lierq53.mongodb.net/?retryWrites=true&w=majority';
 const PORT = 3001;
 connectDB();
 
 app.use(cors())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
 
-app.get("/events", async (req, res) => {
-    try {
-        const data = await Events.find({});
-        res.json(data)
-        if (!data) {
-            throw new Error('No data find')
-        }
-        res.status(201).json(data)
-    } catch (error) {
-        console.log(error, 'error')
-        res.status(500).json({error: 'Some error'})
+app.get('/events', async (req, res) => {
+  try {
+    const data = await Events.find({});
+    //res.json(data)
+    if (!data) {
+      throw new Error('No data find')
     }
+    //res.status(201).json(data)
+    res.send(data)
+  } catch (error) {
+    console.log(error, 'error')
+    res.status(500).json({ error: 'Some error' })
+  }
+})
+
+app.post('/insert', async (req, res) => {
+  try {
+    const { name, description, severity, timestamp } = req.body;
+    const data = await Events.create({ name, description, severity, timestamp })
+
+    if (!data) {
+      throw new Error('Error while creating event')
+    }
+
+    //res.status(201).json(data)
+  } catch (error) {
+
+    res.status(500).json({ error: 'Some error while creating event' })
+  }
 })
 
 app.listen(PORT, () => {
-    console.log("server started on port 3001")
+  console.log('server started on port 3001')
 })
 
 

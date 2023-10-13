@@ -12,20 +12,20 @@ interface IEventsTable {
     list: ISingleEvent[]
 }
 const EventsTable: React.FC<IEventsTable> = (props) => {
-    const {list = []} = props;
+    const {list} = props;
     // const [ignored, setIgnored] = useState(0)
     // const [reported, setReported] = useState(0)
     const [value, setValue] = React.useState(0);
-
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 
-    const irData = (arr: any, param: string) => {
+    const ignoredReported = (arr: any, param: string) => {
+        console.log(arr, 'arr')
         return arr.reduce((sum: number, item: any) => item[param] ? sum+1 : sum, 0)
     }
-    const ignored = irData(list, 'ignored')
-    const reported = irData(list, 'reported')
+    const ignored = ignoredReported(list, 'ignored')
+    const reported = ignoredReported(list, 'reported')
     const classes = useStyles();
     return ( <div data-testid='table-testId' className={classes.tableContainer}>
             <Box sx={{ width: '100%' }}>
