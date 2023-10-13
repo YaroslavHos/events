@@ -12,6 +12,7 @@ interface IEventForm {
 const EventForm: React.FC<IEventForm> = (props) => {
     const {actionType = 'insert', additionalData} = props
     const [formValues, setFormValues] = useState({})
+    const [severity, setSeverity] = useState('High')
     const [error, setError] = React.useState(false);
     const dispatch = useDispatch();
     const classes = useStyles()
@@ -20,10 +21,6 @@ const EventForm: React.FC<IEventForm> = (props) => {
         e.preventDefault();
         const timestamp = new Date().getTime() / 1000;
         let data = formValues
-
-        if(!('severity' in formValues)) {
-            data = {...data, 'severity': e.target.severity.value}
-        }
 
         if (actionType === 'insert') {
             dispatch<any>(createEventAction({...data, timestamp: timestamp}))
@@ -38,6 +35,7 @@ const EventForm: React.FC<IEventForm> = (props) => {
     }
 
     const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSeverity((e.target as HTMLInputElement).value)
         const { name, checked, value } = e.target;
         checked && setFormValues({...formValues, [name]: value});
         setError(false);
@@ -72,7 +70,7 @@ const EventForm: React.FC<IEventForm> = (props) => {
                 <RadioGroup
                     aria-labelledby="severity"
                     defaultValue="High"
-                    value="High"
+                    value={severity}
                     name="severity"
                     onChange={handleRadioChange}
                 >
