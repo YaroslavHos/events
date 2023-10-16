@@ -51,6 +51,22 @@ app.post('/insert', async (req, res) => {
   }
 })
 
+app.put('/update/:id', async (req, res) => {
+  try {
+    const { name, description, severity } = req.body;
+    const id = req.params.id;
+    const data = await Events.findByIdAndUpdate(id, { $set: req.body }, { new: true });
+    if (!data) {
+      throw new Error('Error no data to update')
+    }
+    //res.status(201).send(data)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'Some error while updating event' })
+  }
+
+})
+
 app.listen(PORT, () => {
   console.log('server started on port 3001')
 })

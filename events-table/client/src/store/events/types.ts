@@ -3,8 +3,8 @@ export interface IEventsListState {
     isLoading: boolean
 }
 export interface ISingleEvent {
+    _id: string,
     name: string,
-    id: number,
     severity: string,
     ignored?: boolean,
     reported?: boolean,

@@ -11,7 +11,7 @@ import {deleteDataAction, ignoreReportDataAction} from "../../store/events/actio
 import EventForm from "../EventForm";
 
 const Event: React.FC<ISingleEvent> = (props) => {
-    const { name, id, ignored, reported, timestamp, severity, description } = props;
+    const { name, _id, ignored, reported, timestamp, severity, description } = props;
     const [ignoredEvent, setIgnoredEvent] = useState(ignored)
     const [reportedEvent, setReportedEvent] = useState(reported)
     const dispatch = useDispatch();
@@ -42,14 +42,14 @@ const Event: React.FC<ISingleEvent> = (props) => {
 
     const ignoreEvent = (e: React.BaseSyntheticEvent) => {
         setIgnoredEvent(e.target.checked)
-        dispatch<any>(ignoreReportDataAction({id: id, ignored: !ignoredEvent}))
+        dispatch<any>(ignoreReportDataAction({id: _id, ignored: !ignoredEvent}))
     }
     const reportEvent = (e: React.BaseSyntheticEvent) => {
         setReportedEvent(e.target.checked)
-        dispatch<any>(ignoreReportDataAction({id: id, reported: !reportedEvent}))
+        dispatch<any>(ignoreReportDataAction({id: _id, reported: !reportedEvent}))
     }
     const deleteEvent = () => {
-        dispatch<any>(deleteDataAction({id: id}))
+        dispatch<any>(deleteDataAction({id: _id}))
     }
 
     return (
@@ -73,7 +73,7 @@ const Event: React.FC<ISingleEvent> = (props) => {
                                 />
                                 <div>
                                     <IconButton
-                                        aria-label="modify"
+                                        aria-label="update"
                                         color="warning"
                                         onClick={handleOpen}
                                     >
@@ -86,7 +86,7 @@ const Event: React.FC<ISingleEvent> = (props) => {
                                         aria-describedby="modal-modal-description"
                                     >
                                         <Box className={classes.modalBox}>
-                                            <EventForm additionalData={id} actionType='update'/>
+                                            <EventForm additionalData={_id} actionType='update'/>
                                         </Box>
                                     </Modal>
                                 </div>
