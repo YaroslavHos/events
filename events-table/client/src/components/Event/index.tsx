@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import useStyles from "./styles";
 import {ISingleEvent} from "../../store/events/types";
 import Switch from "@mui/material/Switch";
-import {Box, Button, FormControlLabel, Grid, IconButton, Modal} from "@mui/material";
+import {Box, FormControlLabel, Grid, IconButton, Modal} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
@@ -53,8 +53,8 @@ const Event: React.FC<ISingleEvent> = (props) => {
     }
 
     return (
-                <Grid item xs={10}>
-                    <div className={classes.eventContainer}>
+        <Grid item xs={10}>
+            <div className={classes.eventContainer}>
                         <div className={classes.eventTitle}>{name}</div>
                         <div className={classes.eventLine}><span>Severity - </span>{severity}</div>
                         <div className={classes.eventLine}><span>Timestamp - </span>{timestamp}</div>
@@ -117,7 +117,7 @@ const Event: React.FC<ISingleEvent> = (props) => {
                             </Stack>
                         </div>
                     </div>
-                </Grid>
+        </Grid>
     )
 }
 
