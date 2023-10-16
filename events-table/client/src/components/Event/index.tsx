@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import {useDispatch} from "react-redux";
-import {deleteDataAction, ignoreReportDataAction} from "../../store/events/actions/fetchData";
+import {deleteDataAction, updateDataAction} from "../../store/events/actions/fetchData";
 import EventForm from "../EventForm";
 
 const Event: React.FC<ISingleEvent> = (props) => {
@@ -42,11 +42,11 @@ const Event: React.FC<ISingleEvent> = (props) => {
 
     const ignoreEvent = (e: React.BaseSyntheticEvent) => {
         setIgnoredEvent(e.target.checked)
-        dispatch<any>(ignoreReportDataAction({id: _id, ignored: !ignoredEvent}))
+        dispatch<any>(updateDataAction({id: _id, ignored: !ignoredEvent}))
     }
     const reportEvent = (e: React.BaseSyntheticEvent) => {
         setReportedEvent(e.target.checked)
-        dispatch<any>(ignoreReportDataAction({id: _id, reported: !reportedEvent}))
+        dispatch<any>(updateDataAction({id: _id, reported: !reportedEvent}))
     }
     const deleteEvent = () => {
         dispatch<any>(deleteDataAction({id: _id}))

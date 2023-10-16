@@ -3,9 +3,6 @@ import {
     fetchDataRequest,
     fetchDataSuccess,
     fetchDataError,
-    ignoreReportEventRequest,
-    ignoreReportEventSuccess,
-    ignoreReportEventError,
     deleteDataRequest,
     deleteDataRequestSuccess,
     deleteDataRequestError,
@@ -15,7 +12,6 @@ import {
     insertEventRequest,
     insertEventSuccess, insertEventError,
 } from "./index";
-import Axios from "axios";
 const ROOT_URL = 'http://localhost:3001';
 
 export const fetchEventsAction = () => {
@@ -52,31 +48,6 @@ export const createEventAction = (action: any) => {
             dispatch(insertEventError(error));
         });
     }
-    // Axios.post(url, {
-    //     eventName: name,
-    //     eventSeverity: severity,
-    //     timestamp: timestamp,
-    // }).then(() => {
-    //     alert('successful insert');
-    // })
-}
-
-export const ignoreReportDataAction = (action: any) => {
-    const {id, ignored, reported} = action;
-    let path = ignored !== undefined ? 'ignored' : 'reported'
-    let val = ignored !== undefined ? ignored : reported
-    const url = `${ROOT_URL}/${path}/${id}`;
-
-    return (dispatch: any) => {
-        dispatch(ignoreReportEventRequest(action))
-            axios.put(url, {
-                [path]: val,
-            }).then((response: any) => {
-                dispatch(ignoreReportEventSuccess(response.data));
-            }).catch((error: any) => {
-                dispatch(ignoreReportEventError(error));
-            });
-        }
 }
 
 export const deleteDataAction = (action: any) => {
@@ -95,7 +66,7 @@ export const deleteDataAction = (action: any) => {
 }
 
 export const updateDataAction = (action: any) => {
-    const {id, name, severity, timestamp, description} = action;
+    const {id, name, severity, timestamp, description, ignored, reported} = action;
     const url = `${ROOT_URL}/update/${id}`;
 
     return (dispatch: any) => {
@@ -104,7 +75,9 @@ export const updateDataAction = (action: any) => {
             name: name,
             severity: severity,
             timestamp: timestamp,
-            description: description
+            description: description,
+            ignored: ignored,
+            reported: reported
         }).then((response: any) => {
             dispatch(updateDataRequestSuccess(response.data));
         }).catch((error: any) => {
