@@ -21,7 +21,6 @@ const EventForm: React.FC<IEventForm> = (props) => {
         e.preventDefault();
         const timestamp = new Date().getTime() / 1000;
         let data = formValues
-
         if (actionType === 'insert') {
             dispatch<any>(createEventAction({...data, timestamp: timestamp}))
         } else {

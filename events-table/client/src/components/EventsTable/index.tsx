@@ -19,9 +19,7 @@ const EventsTable: React.FC<IEventsTable> = (props) => {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
-
     const ignoredReported = (arr: any, param: string) => {
-        console.log(arr, 'arr')
         return arr.reduce((sum: number, item: any) => item[param] ? sum+1 : sum, 0)
     }
     const ignored = ignoredReported(list, 'ignored')

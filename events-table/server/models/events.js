@@ -9,9 +9,6 @@ const EventSchema = new Schema({
   description: {
     type: String,
   },
-  id: {
-    type: Number
-  },
   ignored: {
     type: Boolean,
     default: false
