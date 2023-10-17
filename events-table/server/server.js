@@ -9,9 +9,7 @@ const router = express.Router();
 const { createServer } = require('http');
 const connectDB = require('./connectDB');
 const Events = require('./models/events')
-const { MongoClient } = require('mongodb');
 
-const MONGODB_URI = 'mongodb+srv://Evemern:Evemernpassword@cluster1.lierq53.mongodb.net/?retryWrites=true&w=majority';
 const PORT = 3001;
 connectDB();
 
@@ -23,7 +21,6 @@ app.use(express.json());
 app.get('/events', async (req, res) => {
   try {
     const data = await Events.find({});
-    //res.json(data)
     if (!data) {
       throw new Error('No data find')
     }
