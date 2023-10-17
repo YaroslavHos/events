@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const express = require('express');
 const app = express();
-const axios = require('axios');
 const mysql = require('mysql2');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -61,7 +60,20 @@ app.put('/update/:id', async (req, res) => {
     console.log(error)
     res.status(500).json({ error: 'Some error while updating event' })
   }
+})
 
+app.delete('/delete/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Events.findByIdAndDelete(id);
+    if (!data) {
+      throw new Error('Error no data to delete')
+    }
+    //res.status(201).send(data)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'Some error while deleting event' })
+  }
 })
 
 app.listen(PORT, () => {
