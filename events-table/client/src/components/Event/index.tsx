@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import useStyles from "./styles";
 import {ISingleEvent} from "../../store/events/types";
 import Switch from "@mui/material/Switch";
-import {Box, FormControlLabel, Grid, IconButton, Modal} from "@mui/material";
+import {Box, Button, FormControlLabel, Grid, IconButton, Modal} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
@@ -18,11 +18,11 @@ const Event: React.FC<ISingleEvent> = (props) => {
     const classes = useStyles()
 
     const [open, setOpen] = React.useState(false);
-    const [openNew, setOpenNew] = React.useState(false);
+    const [openDel, setOpenDel] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleOpenNew = () => setOpenNew(true);
+    const handleOpenDel = () => setOpenDel(true);
     const handleClose = () => setOpen(false);
-    const handleCloseNew = () => setOpenNew(false);
+    const handleCloseDel = () => setOpenDel(false);
 
     // const openConnection = (e:React.BaseSyntheticEvent) => {
     //     const ws = new WebSocket("ws://localhost:3001/ws");
@@ -49,7 +49,8 @@ const Event: React.FC<ISingleEvent> = (props) => {
         dispatch<any>(updateDataAction({id: _id, reported: !reportedEvent}))
     }
     const deleteEvent = () => {
-        dispatch<any>(deleteDataAction({id: _id}))
+        dispatch<any>(deleteDataAction({id: _id}));
+        setOpenDel(false)
     }
 
     return (
@@ -94,23 +95,18 @@ const Event: React.FC<ISingleEvent> = (props) => {
                                     <IconButton
                                         aria-label="delete"
                                         color="error"
-                                        onClick={handleOpenNew}
+                                        onClick={handleOpenDel}
                                     >
                                         <DeleteIcon />
                                     </IconButton>
                                     <Modal
-                                        open={openNew}
-                                        onClose={handleCloseNew}
+                                        open={openDel}
+                                        onClose={handleCloseDel}
                                     >
                                         <Box className={classes.modalBox}>
                                             <span>Are you sure?</span>
-                                                <IconButton
-                                                    aria-label="delete"
-                                                    color="error"
-                                                    onClick={deleteEvent}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
+                                            <Button color="error" onClick={deleteEvent}>Yes</Button>
+                                            <Button color="success" onClick={() => setOpenDel(false)}>No</Button>
                                         </Box>
                                     </Modal>
                                 </div>
