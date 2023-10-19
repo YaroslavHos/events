@@ -27,7 +27,7 @@ export const fetchEventsAction = () => {
                     dispatch(fetchDataSuccess(response.data));
                 })
                 .catch((error: any) => {
-                    dispatch(fetchDataError(error));
+                    dispatch(fetchDataError(error.message));
                 });
         };
 }
@@ -45,7 +45,7 @@ export const createEventAction = (action: any) => {
         }).then((response: any) => {
             dispatch(insertEventSuccess(response.data));
         }).catch((error: any) => {
-            dispatch(insertEventError(error));
+            dispatch(insertEventError(error.message));
         });
     }
 }
@@ -60,7 +60,7 @@ export const deleteDataAction = (action: any) => {
                 .then((response: any) => {
                     dispatch(deleteDataRequestSuccess(response.data));
                 }).catch((error: any) => {
-                    dispatch(deleteDataRequestError(error))
+                    dispatch(deleteDataRequestError(error.message))
             })
     }
 }
@@ -81,7 +81,7 @@ export const updateDataAction = (action: any) => {
         }).then((response: any) => {
             dispatch(updateDataRequestSuccess(response.data));
         }).catch((error: any) => {
-            dispatch(updateDataRequestError(error));
+            dispatch(updateDataRequestError(error.message));
         });
     }
 }

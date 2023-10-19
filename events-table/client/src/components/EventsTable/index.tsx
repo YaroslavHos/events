@@ -13,14 +13,14 @@ interface IEventsTable {
 }
 const EventsTable: React.FC<IEventsTable> = (props) => {
     const {list} = props;
+    console.log('events table loading')
     // const [ignored, setIgnored] = useState(0)
     // const [reported, setReported] = useState(0)
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
     const ignoredReported = (arr: any, param: string) => {
-        //console.log(arr, typeof arr, 'test')
         return arr.reduce((sum: number, item: any) => item[param] ? sum+1 : sum, 0)
     }
     const ignored = ignoredReported(list, 'ignored')
