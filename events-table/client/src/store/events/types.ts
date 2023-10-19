@@ -1,6 +1,7 @@
 export interface IEventsListState {
     data: ISingleEvent[],
-    isLoading: boolean
+    isLoading: boolean,
+    error: string
 }
 export interface ISingleEvent {
     _id: string,

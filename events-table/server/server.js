@@ -23,8 +23,7 @@ app.get('/events', async (req, res) => {
     if (!data) {
       throw new Error('No data find')
     }
-    //res.status(201).json(data)
-    res.send(data)
+    res.status(201).send(data)
   } catch (error) {
     console.log(error, 'error')
     res.status(500).json({ error: 'Some error' })
@@ -34,13 +33,13 @@ app.get('/events', async (req, res) => {
 app.post('/insert', async (req, res) => {
   try {
     const { name, description, severity, timestamp } = req.body;
-    const data = await Events.create({ name, description, severity, timestamp })
+    const data = await Events.create(req.body)
 
     if (!data) {
       throw new Error('Error while creating event')
     }
 
-    //res.status(201).json(data)
+    res.status(201).json(data)
   } catch (error) {
 
     res.status(500).json({ error: 'Some error while creating event' })
@@ -55,7 +54,7 @@ app.put('/update/:id', async (req, res) => {
     if (!data) {
       throw new Error('Error no data to update')
     }
-    //res.status(201).send(data)
+    res.status(201).send(data)
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Some error while updating event' })
@@ -69,7 +68,8 @@ app.delete('/delete/:id', async (req, res) => {
     if (!data) {
       throw new Error('Error no data to delete')
     }
-    //res.status(201).send(data)
+
+    res.status(201).send(id)
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Some error while deleting event' })
