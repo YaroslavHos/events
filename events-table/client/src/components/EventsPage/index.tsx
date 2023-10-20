@@ -14,18 +14,17 @@ const EventsPage = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const eventsList = useSelector((state: IRootState) => state?.events);
-
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
     React.useEffect(() => {
         dispatch<any>(fetchEventsAction());
     }, [])
 
     const loading = eventsList?.isLoading;
     if (loading || loading === undefined) return 'Data loading'
-    //console.log(loading, 'test renders')
-    // const [eventsList, setEventsList] = useState<any[]>([]);
+
     // ws.onopen = () => {
     //     console.log('We are connected')
     //     ws.send('Hello server')
