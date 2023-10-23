@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import useStyles from "./styles";
 import Event from "../Event";
 import {ISingleEvent} from "../../store/events/types";
@@ -7,12 +7,17 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Grid from "@mui/material/Grid";
+import {Theme, ThemeOptions, useTheme} from "@mui/material/styles";
+import {ThemeContext} from "../Theme";
+import {ITheme} from "../Theme/types";
 
 interface IEventsTable {
     list: ISingleEvent[]
 }
 const EventsTable: React.FC<IEventsTable> = (props) => {
     const {list} = props;
+    const theme = useContext(ThemeContext);
+    console.log(theme, 'theme')
     const [value, setValue] = useState(0);
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -36,10 +41,17 @@ const EventsTable: React.FC<IEventsTable> = (props) => {
             ignoredItems.push(item);
             ignoredCount++
         }
-    })
-    const classes = useStyles();
+    });
+
+    const classes = useStyles(theme);
     return ( <div data-testid='table-testId' className={classes.tableContainer}>
-            <Box sx={{ width: '100%' }}>
+                    {/*<button*/}
+                    {/*    onClick={toggleTheme}*/}
+                    {/*    style={{backgroundColor: theme.background}}>*/}
+                    {/*    Toggle Theme*/}
+                    {/*</button>*/}
+
+            <Box sx={{ width: '100%', bgcolor: 'secondary.main' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                         <Tab label={`Main - ${mainCount}`}/>
