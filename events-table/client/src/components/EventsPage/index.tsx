@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import EventForm from "../EventForm";
 import EventsTable from "../EventsTable";
 import useStyles from './styles'
@@ -7,7 +7,7 @@ import {fetchEventsAction} from "../../store/events/actions/fetchData";
 import {IRootState} from "../../store/types";
 import moment from "moment";
 import {Box, Button, Modal} from "@mui/material";
-
+import { ThemeContext } from "../Theme";
 //const ws = new WebSocket("ws://localhost:3001/ws")
 
 const EventsPage = () => {
@@ -17,11 +17,9 @@ const EventsPage = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
     React.useEffect(() => {
         dispatch<any>(fetchEventsAction());
     }, [])
-
     const loading = eventsList?.isLoading;
     if (loading || loading === undefined) return 'Data loading'
 
