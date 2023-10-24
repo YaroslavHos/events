@@ -8,13 +8,13 @@ interface IPalette {
     extraLight50: string;
 }
 export interface IBackground {
-    background: string
+    bgColor: string
 }
 export interface ITheme {
-    color: {
-        dark: IBackground,
-        light: IBackground
-    }
+    theme: string
+
+    toggleTheme: () => void
+
 
     // colors: {
     //     primary: IPalette;

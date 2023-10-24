@@ -16,7 +16,8 @@ interface IEventsTable {
 }
 const EventsTable: React.FC<IEventsTable> = (props) => {
     const {list} = props;
-    const theme = useContext(ThemeContext);
+    //const theme = useContext(ThemeContext);
+    const { toggleTheme, theme } = useContext(ThemeContext);
     console.log(theme, 'theme')
     const [value, setValue] = useState(0);
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
