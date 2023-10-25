@@ -1,13 +1,12 @@
 import {createUseStyles} from "react-jss";
-import {Theme} from '@mui/material/styles';
-import {ITheme} from "../Theme/types";
+import {IPalette} from "../Theme";
 
-export default createUseStyles( (theme) => ({
+export default createUseStyles( (theme: IPalette) => ({
     tableContainer: {
         maxWidth: 1400,
         padding: 10,
         margin: '0 auto',
-        backgroundColor: theme
+
     },
     info: {
         display: 'flex',

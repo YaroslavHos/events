@@ -1,6 +1,7 @@
 import {createUseStyles} from "react-jss";
+import {IPalette} from "../Theme";
 
-export default createUseStyles( {
+export default createUseStyles( (theme: IPalette) => ({
     countDown: {
         position: 'absolute',
         right: 5,
@@ -22,5 +23,9 @@ export default createUseStyles( {
         backgroundColor: '#fff',
         borderRadius: 4,
         boxShadow: '0px 6px 10px 4px rgba(102, 112, 133, 0.15), 0px 2px 3px rgba(102, 112, 133, 0.3)',
+    },
+    pageContainer: {
+        backgroundColor: theme.bgColor,
+        height: '100vh',
     }
-})
+}))

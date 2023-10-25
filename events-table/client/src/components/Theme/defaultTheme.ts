@@ -1,4 +1,4 @@
-import {ITheme} from "./types";
+//import {ITheme} from "./types";
 
 export enum ThemeColor {
     dark = 'dark',

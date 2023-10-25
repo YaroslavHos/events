@@ -12,7 +12,8 @@ import { ThemeContext } from "../Theme";
 
 const EventsPage = () => {
     const dispatch = useDispatch();
-    const classes = useStyles();
+    const theme = useContext(ThemeContext);
+    const classes = useStyles(theme);
     const eventsList = useSelector((state: IRootState) => state?.events);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -52,7 +53,10 @@ const EventsPage = () => {
     const endDate = moment().startOf('day')
     const diff = moment('20321125').diff(endDate, 'days')
 
-    return (<div>
+    return (<div className={classes.pageContainer}>
+        <button onClick={theme.toggleTheme}>
+            Toggle Theme
+        </button>
         <Button sx={{ m: 1 }} onClick={handleOpen} variant="outlined">
             Add Event
         </Button>
