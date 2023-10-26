@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import useStyles from "./styles";
 import {ISingleEvent} from "../../store/events/types";
 import Switch from "@mui/material/Switch";
@@ -9,13 +9,15 @@ import CreateIcon from '@mui/icons-material/Create';
 import {useDispatch} from "react-redux";
 import {deleteDataAction, updateDataAction} from "../../store/events/actions/fetchData";
 import EventForm from "../EventForm";
+import {ThemeContext} from "../Theme";
 
 const Event: React.FC<ISingleEvent> = (props) => {
     const { name, _id, ignored, reported, timestamp, severity, description } = props;
+    const theme = useContext(ThemeContext);
     const [ignoredEvent, setIgnoredEvent] = useState(ignored)
     const [reportedEvent, setReportedEvent] = useState(reported)
     const dispatch = useDispatch();
-    const classes = useStyles()
+    const classes = useStyles(theme)
 
     const [open, setOpen] = React.useState(false);
     const [openDel, setOpenDel] = React.useState(false);

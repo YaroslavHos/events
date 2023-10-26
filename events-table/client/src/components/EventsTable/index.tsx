@@ -7,15 +7,14 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Grid from "@mui/material/Grid";
-import {Theme, ThemeOptions, useTheme} from "@mui/material/styles";
-import {ThemeContext} from "../Theme";
-//import {ITheme} from "../Theme/types";
+import {IThemePalette, ThemeContext} from "../Theme";
 
 interface IEventsTable {
     list: ISingleEvent[]
 }
 const EventsTable: React.FC<IEventsTable> = (props) => {
     const {list} = props;
+    const theme = useContext(ThemeContext)
     const [value, setValue] = useState(0);
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -40,15 +39,15 @@ const EventsTable: React.FC<IEventsTable> = (props) => {
             ignoredCount++
         }
     });
-
-    const classes = useStyles();
+    const text = theme.theme
+    const classes = useStyles(theme);
     return ( <div data-testid='table-testId' className={classes.tableContainer}>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label={`Main - ${mainCount}`}/>
-                        <Tab label={`Ignored - ${ignoredCount}`}/>
-                        <Tab label={`Reported - ${reportedCount}`}/>
+                        <Tab sx={{color: `${text.text600}`}} label={`Main - ${mainCount}`}/>
+                        <Tab sx={{color: `${text.text600}`}} label={`Ignored - ${ignoredCount}`}/>
+                        <Tab sx={{color: `${text.text600}`}} label={`Reported - ${reportedCount}`}/>
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={2}>
