@@ -1,7 +1,7 @@
 import {createUseStyles} from "react-jss";
-import {IPalette} from "../Theme";
+import {IThemePalette} from "../Theme";
 
-export default createUseStyles( (theme: IPalette) => ({
+export default createUseStyles( (theme: IThemePalette) => ({
     countDown: {
         position: 'absolute',
         right: 5,
@@ -20,7 +20,7 @@ export default createUseStyles( (theme: IPalette) => ({
         justifyContent: 'center',
         alignItems: 'center',
         width: 400,
-        backgroundColor: '#fff',
+        backgroundColor: theme.bgColor,
         borderRadius: 4,
         boxShadow: '0px 6px 10px 4px rgba(102, 112, 133, 0.15), 0px 2px 3px rgba(102, 112, 133, 0.3)',
     },

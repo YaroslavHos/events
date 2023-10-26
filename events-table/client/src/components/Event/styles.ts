@@ -1,20 +1,21 @@
 import {createUseStyles} from "react-jss";
+import {IThemePalette} from "../Theme";
 
-export default createUseStyles( {
+export default createUseStyles( (theme: IThemePalette) => ({
     eventContainer: {
         fontFamily: 'Inter, sans-serif',
         fontSize: 14,
-        color: 'rgb(71, 84, 103)',
+        color: theme.text600,
         borderRadius: 4,
         padding: 12,
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'rgb(249, 250, 251)',
+        backgroundColor: theme.bgColor2,
         boxShadow: '0px 6px 10px 4px rgba(102, 112, 133, 0.15), 0px 2px 3px rgba(102, 112, 133, 0.3)',
     },
     eventTitle: {
         fontWeight: 500,
-        color: 'rgb(16, 24, 40)',
+        color: theme.headline,
         marginBottom: 4
     },
     eventDescription: {
@@ -24,7 +25,8 @@ export default createUseStyles( {
     },
     eventLine: {
         fontWeight: 400,
-        marginBottom: 2
+        marginBottom: 2,
+        color: theme.text600,
     },
     eventButtonsContainer: {
         width: '100%',
@@ -39,8 +41,9 @@ export default createUseStyles( {
         justifyContent: 'center',
         alignItems: 'center',
         width: 400,
-        backgroundColor: '#fff',
+        backgroundColor: theme.bgColor2,
+        color: theme.text600,
         borderRadius: 4,
         boxShadow: '0px 6px 10px 4px rgba(102, 112, 133, 0.15), 0px 2px 3px rgba(102, 112, 133, 0.3)',
     }
-})
+}))

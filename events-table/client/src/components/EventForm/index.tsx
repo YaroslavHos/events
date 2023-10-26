@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
 import {createEventAction, updateDataAction} from "../../store/events/actions/fetchData";
 import {useDispatch} from "react-redux";
 import useStyles from "./styles";
+import {ThemeContext} from "../Theme";
 
 interface IEventForm {
     actionType?: string,
@@ -10,13 +11,14 @@ interface IEventForm {
 }
 
 const EventForm: React.FC<IEventForm> = (props) => {
-    const {actionType = 'insert', additionalData} = props
+    const {actionType = 'insert', additionalData} = props;
+    const theme = useContext(ThemeContext)
     const [formValues, setFormValues] = useState({})
     const [severity, setSeverity] = useState('High')
     const [error, setError] = React.useState(false);
     const dispatch = useDispatch();
-    const classes = useStyles()
-
+    const classes = useStyles(theme)
+    const text = theme.theme;
     const submitEvent = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         const timestamp = new Date().getTime() / 1000;
@@ -45,6 +47,7 @@ const EventForm: React.FC<IEventForm> = (props) => {
             <form onSubmit={submitEvent} className={classes.form}>
             <FormControl sx={{ m: 2 }} error={error} variant="standard" fullWidth>
                 <TextField
+                    sx={{ "label": {color: `${text.text600}`} }}
                     type="text"
                     aria-labelledby="event-name"
                     label="Event name"
@@ -54,6 +57,7 @@ const EventForm: React.FC<IEventForm> = (props) => {
                     onChange={onChangeWrapper}
                 />
                 <TextField
+                    sx={{ "label": {color: text.text600}, "borderColor": {color: text.text600} }}
                     className={classes.textArea}
                     multiline={true}
                     minRows={4}
@@ -65,7 +69,7 @@ const EventForm: React.FC<IEventForm> = (props) => {
                     defaultValue={''}
                     onChange={onChangeWrapper}
                 />
-                <FormLabel id="severity">Severity</FormLabel>
+                <FormLabel sx={{color: `${text.text600}`}} id="severity">Severity</FormLabel>
                 <RadioGroup
                     aria-labelledby="severity"
                     defaultValue="High"
