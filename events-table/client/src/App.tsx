@@ -1,13 +1,23 @@
 import React from 'react';
 import './App.css';
 import EventsPage from "./components/EventsPage";
-import ThemeProvider from "./components/Theme";
+import {Link, Route, Routes} from "react-router-dom";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-      <ThemeProvider>
-      <EventsPage/>
-      </ThemeProvider>
+      <>
+        <nav>
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/something '>Another Page</Link></li>
+          </ul>
+        </nav>
+      <Routes>
+      <Route path='/' element={<EventsPage/>} />
+      <Route path='*' element={<NotFound/>} />
+      </Routes>
+      </>
   );
 }
 
