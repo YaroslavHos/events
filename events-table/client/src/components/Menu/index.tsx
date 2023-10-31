@@ -11,6 +11,7 @@ const Menu = () => {
             <br/>
             <Link to='/events'>events</Link>
             <br/>
+            <Outlet/>
         </>
     )
 }
