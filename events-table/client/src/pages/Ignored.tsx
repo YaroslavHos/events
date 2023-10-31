@@ -1,18 +1,24 @@
-import React, {useContext} from "react";
-import {useOutletContext} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {IRootState} from "../store/types";
+import React from "react";
+import {useLoaderData} from "react-router-dom";
 import Event from "../components/Event";
+import axios from "axios";
 
 const Ignored = () => {
-    const eventsList = useSelector((state: IRootState) => state?.events);
-    const outlet = useOutletContext();
-    console.log(outlet.data.data, 'eventsList.data')
+
+    const outlet = useLoaderData();
     return (<div >
 
-        {outlet?.data.data && outlet.data.data.map((item, index) => {
+        {outlet && outlet.map((item, index) => {
             if(item.ignored)  return <Event key={index} {...item}/>
         })}
     </div>)
 }
 export default Ignored;
+
+export function LoadEvents() {
+    return axios.get("http://localhost:3001/events").then((response) => {
+        return response.data
+    })
+}
+
+
