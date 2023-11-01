@@ -18,7 +18,7 @@ function App() {
                 <Route index element={<EventsPage />}/>
                 <Route path='/events' element={<EventsLayout data={eventsList}/>}>
                     <Route path='ignored' element={<Ignored/>} loader={LoadEvents}/>
-                    <Route path='reported' element={<Reported/>}/>
+                    <Route path='reported' element={<Reported/>} loader={LoadEvents}/>
                     {/*<Route path=':id' element={<Event/>} />*/}
                 </Route>
                 <Route path='*' element={<NotFound/>}/>

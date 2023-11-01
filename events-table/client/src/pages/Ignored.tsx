@@ -2,16 +2,22 @@ import React from "react";
 import {useLoaderData} from "react-router-dom";
 import Event from "../components/Event";
 import axios from "axios";
+import {Box, Grid} from "@mui/material";
 
 const Ignored = () => {
-
     const outlet = useLoaderData();
-    return (<div >
 
-        {outlet && outlet.map((item, index) => {
-            if(item.ignored)  return <Event key={index} {...item}/>
-        })}
-    </div>)
+    return (<Box sx={{ width: '100%' }}>
+        <Grid container
+            spacing={2}
+            direction="row"
+            justifyContent="center"
+            alignItems="center">
+            {outlet && outlet.map((item, index) => {
+                return item.ignored && <Event key={index} {...item}/>
+            })}
+        </Grid>
+    </Box>)
 }
 export default Ignored;
 
