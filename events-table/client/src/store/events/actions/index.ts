@@ -37,6 +37,26 @@ export const fetchDataError = (error: string) => {
     };
 }
 
+export const fetchOneEventRequest = (data: any) =>    {
+    return {
+        type: eventsActionTypes.FETCH_ONE_EVENT_REQUEST,
+        payload: data
+    };
+}
+export const fetchOneEventSuccess = (data: any) => {
+    return {
+        type: eventsActionTypes.FETCH_ONE_EVENT_SUCCESS,
+        payload: data
+    };
+}
+
+export const fetchOneEventError = (error: string) => {
+    return {
+        type: eventsActionTypes.FETCH_ONE_EVENT_ERROR,
+        payload: error
+    };
+}
+
 export const deleteDataRequest = (data: any) => {
     return {
         type: eventsActionTypes.DELETE_DATA_REQUEST,

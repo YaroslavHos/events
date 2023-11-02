@@ -10,6 +10,7 @@ import {useDispatch} from "react-redux";
 import {deleteDataAction, updateDataAction} from "../../store/events/actions/fetchData";
 import EventForm from "../EventForm";
 import {ThemeContext} from "../Theme";
+import {Link} from "react-router-dom";
 
 const Event: React.FC<ISingleEvent> = (props) => {
     const { name, _id, ignored, reported, timestamp, severity, description } = props;
@@ -112,6 +113,14 @@ const Event: React.FC<ISingleEvent> = (props) => {
                                         </Box>
                                     </Modal>
                                 </div>
+                                <Link to={`/events/${_id}`}>
+                                    <IconButton
+                                        aria-label="go-to"
+                                        color="success"
+                                    >
+                                        <CreateIcon/>
+                                    </IconButton>
+                                </Link>
                             </Stack>
                         </div>
                     </div>
