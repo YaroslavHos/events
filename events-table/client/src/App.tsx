@@ -9,6 +9,7 @@ import EventsLayout from "./components/Menu/EventsLayout";
 import Reported from "./pages/Reported";
 import {useSelector} from "react-redux";
 import {IRootState} from "./store/types";
+import SingleEvent, {LoadSingleEvent} from "./pages/SingleEvent";
 
 function App() {
     const eventsList = useSelector((state: IRootState) => state?.events);
@@ -19,7 +20,7 @@ function App() {
                 <Route path='/events' element={<EventsLayout data={eventsList}/>}>
                     <Route path='ignored' element={<Ignored/>} loader={LoadEvents}/>
                     <Route path='reported' element={<Reported/>} loader={LoadEvents}/>
-                    {/*<Route path=':id' element={<Event/>} />*/}
+                    <Route path=':id' element={<SingleEvent/>}/>
                 </Route>
                 <Route path='*' element={<NotFound/>}/>
             </Route>

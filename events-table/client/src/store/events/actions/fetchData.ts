@@ -10,7 +10,7 @@ import {
     updateDataRequestSuccess,
     updateDataRequestError,
     insertEventRequest,
-    insertEventSuccess, insertEventError,
+    insertEventSuccess, insertEventError, fetchOneEventRequest, fetchOneEventSuccess, fetchOneEventError,
 } from "./index";
 const ROOT_URL = 'http://localhost:3001';
 
@@ -30,6 +30,21 @@ export const fetchEventsAction = () => {
                     dispatch(fetchDataError(error.message));
                 });
         };
+}
+
+export const fetchOneEventAction = (action: any) => {
+    const {id} = action;
+    const url = `${ROOT_URL}/events/${id}`;
+
+    return (dispatch: any) => {
+        dispatch(fetchOneEventRequest(action))
+        axios.get(url)
+            .then((response: any) => {
+                dispatch(fetchOneEventSuccess(response.data));
+            }).catch((error: any) => {
+            dispatch(fetchOneEventError(error.message))
+        })
+    }
 }
 
 export const createEventAction = (action: any) => {

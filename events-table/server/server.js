@@ -30,6 +30,21 @@ app.get('/events', async (req, res) => {
   }
 })
 
+app.get('/events/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Events.findById(id);
+    if (!data) {
+      throw new Error('Error no data found with this id')
+    }
+
+    res.status(201).send(data)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'Some error while looking for event' })
+  }
+})
+
 app.post('/insert', async (req, res) => {
   try {
     const { name, description, severity, timestamp } = req.body;

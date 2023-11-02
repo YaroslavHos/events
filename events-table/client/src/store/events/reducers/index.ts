@@ -8,6 +8,12 @@ const eventsReducer = (state: IEventsListState = {} as IEventsListState, action:
         case eventsActionTypes.FETCH_DATA_SUCCESS:
             return { ...state, isLoading: false, data: action.payload};
         case eventsActionTypes.FETCH_DATA_ERROR:
+            return { ...state, isLoading: false, error: action.payload};
+        case eventsActionTypes.FETCH_ONE_EVENT_REQUEST:
+            return { ...state, isLoading: true };
+        case eventsActionTypes.FETCH_ONE_EVENT_SUCCESS:
+            return { ...state, isLoading: false, data: action.payload};
+        case eventsActionTypes.FETCH_ONE_EVENT_ERROR:
             return { ...state, isLoading: false, error: action.payload}
         case eventsActionTypes.INSERT_EVENT_REQUEST:
             return { ...state, isLoading: true };
