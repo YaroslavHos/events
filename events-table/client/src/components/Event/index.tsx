@@ -15,6 +15,7 @@ import {Link} from "react-router-dom";
 const Event: React.FC<ISingleEvent> = (props) => {
     const { name, _id, ignored, reported, timestamp, severity, description } = props;
     const theme = useContext(ThemeContext);
+    console.log(theme, 'theme in event')
     const [ignoredEvent, setIgnoredEvent] = useState(ignored)
     const [reportedEvent, setReportedEvent] = useState(reported)
     const dispatch = useDispatch();
