@@ -1,5 +1,5 @@
 export interface IEventsListState {
-    data: ISingleEvent[],
+    data: any,
     isLoading: boolean,
     error: string
 }
