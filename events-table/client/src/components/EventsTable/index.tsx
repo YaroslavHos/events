@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import useStyles from "./styles";
 import Event from "../Event";
-import {ISingleEvent} from "../../store/events/types";
+import {IEvent} from "../../store/events/types";
 import CustomTabPanel from "../Tab";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import {IThemePalette, ThemeContext} from "../Theme";
 
 interface IEventsTable {
-    list: ISingleEvent[]
+    list: IEvent[]
 }
 const EventsTable: React.FC<IEventsTable> = (props) => {
     const {list} = props;
@@ -22,9 +22,9 @@ const EventsTable: React.FC<IEventsTable> = (props) => {
     let mainCount = 0;
     let ignoredCount = 0;
     let reportedCount = 0;
-    let mainItems: ISingleEvent[] = [];
-    let reportedItems: ISingleEvent[] = [];
-    let ignoredItems: ISingleEvent[] = [];
+    let mainItems: IEvent[] = [];
+    let reportedItems: IEvent[] = [];
+    let ignoredItems: IEvent[] = [];
     list.forEach((item, index) => {
         if (!item.ignored && !item.reported) {
             mainItems.push(item);

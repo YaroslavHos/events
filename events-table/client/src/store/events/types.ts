@@ -3,7 +3,7 @@ export interface IEventsListState {
     isLoading: boolean,
     error: string
 }
-export interface ISingleEvent {
+export interface IEvent {
     _id: string,
     name: string,
     severity: string,
