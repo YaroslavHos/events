@@ -1,8 +1,5 @@
-import React, {useEffect} from "react";
-import {Link, useOutletContext, useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchOneEventAction} from "../../store/events/actions/fetchData";
-import {IRootState} from "../../store/types";
+import React from "react";
+import {Link, useOutletContext} from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import {Box, Button, FormControlLabel, Grid, IconButton, Modal} from "@mui/material";
 import Switch from "@mui/material/Switch";
@@ -12,11 +9,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useStyles from "../../components/Event/styles";
 import useEvent from "../../components/Event/hooks";
 
-const SingleEvent = () => {
-    const {id} = useParams();
+const SingleEvent = (props) => {
+    const {_id, name, severity, description, ignored, reported, timestamp} = props.data;
     const outlet = useOutletContext()
-    const dispatch = useDispatch();
-    const event = useSelector((state: IRootState) => state?.events?.data);
+    const classes = useStyles(outlet.theme);
+
     const {ignoredEvent,
         reportedEvent,
         openUpdate,
@@ -27,15 +24,7 @@ const SingleEvent = () => {
         handleCloseDel,
         ignoreEvent,
         reportEvent,
-        deleteEvent} = useEvent(event)
-    const classes = useStyles(outlet.theme);
-
-    const {name, severity, description, ignored, reported, timestamp} = event || {};
-
-    useEffect(() => {
-        dispatch<any>(fetchOneEventAction({id: id}));
-    }, [])
-    if (!event) return (<h1>Loading data...</h1>);
+        deleteEvent} = useEvent(props);
 
     return (<Grid item xs={10}>
         <div className={classes.eventContainer}>
@@ -70,7 +59,7 @@ const SingleEvent = () => {
                             aria-describedby="modal-modal-description"
                         >
                             <Box className={classes.modalBox}>
-                                <EventForm additionalData={id} actionType='update'/>
+                                <EventForm additionalData={_id} actionType='update'/>
                             </Box>
                         </Modal>
                     </div>
@@ -93,7 +82,7 @@ const SingleEvent = () => {
                             </Box>
                         </Modal>
                     </div>
-                    <Link to={`/events/${id}`}>
+                    <Link to={`/events/${_id}`}>
                         <IconButton
                             aria-label="go-to"
                             color="success"
