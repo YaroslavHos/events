@@ -5,7 +5,7 @@ const Menu = () => {
     return (
         <>
         <h1>Menu</h1>
-            <Link to='/'>Home</Link>
+            <Link to='/' reloadDocument>Home</Link>
             <br/>
             <Link to='/something'>Another Page</Link>
             <br/>

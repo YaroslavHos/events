@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import EventForm from "../EventForm";
 import EventsTable from "../EventsTable";
 import useStyles from './styles'
@@ -16,9 +16,8 @@ const EventsPage = () => {
     const classes = useStyles(theme);
     const eventsList = useSelector((state: IRootState) => state?.events);
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    React.useEffect(() => {
+    const handleOpen = () => setOpen(!open);
+    useEffect(() => {
         dispatch<any>(fetchEventsAction());
     }, [])
     const loading = eventsList?.isLoading;
@@ -61,7 +60,7 @@ const EventsPage = () => {
             Add Event
         </Button>
         <div className={classes.countDown}>{diff}</div>
-        <Modal open={open} onClose={handleClose}>
+        <Modal open={open} onClose={handleOpen}>
             <Box className={classes.modalBox}>
                 <EventForm />
             </Box>

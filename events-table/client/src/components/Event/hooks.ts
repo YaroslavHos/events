@@ -5,17 +5,16 @@ import {deleteDataAction, updateDataAction} from "../../store/events/actions/fet
 
 const useEvent = (props:  IEvent) => {
     const { _id, ignored, reported } = props;
+    const dispatch = useDispatch();
 
     const [ignoredEvent, setIgnoredEvent] = useState(ignored);
     const [reportedEvent, setReportedEvent] = useState(reported);
-    const dispatch = useDispatch();
 
     const [openUpdate, setOpenUpdate] = React.useState(false);
     const [openDel, setOpenDel] = React.useState(false);
-    const handleOpenUpdate = () => setOpenUpdate(true);
-    const handleOpenDel = () => setOpenDel(true);
-    const handleCloseUpdate = () => setOpenUpdate(false);
-    const handleCloseDel = () => setOpenDel(false);
+
+    const handleOpenUpdate = () => setOpenUpdate(!openUpdate);
+    const handleOpenDel = () => setOpenDel(!openDel);
 
     const ignoreEvent = (e: React.BaseSyntheticEvent) => {
         setIgnoredEvent(e.target.checked)
@@ -37,8 +36,6 @@ const useEvent = (props:  IEvent) => {
         openDel,
         handleOpenUpdate,
         handleOpenDel,
-        handleCloseUpdate,
-        handleCloseDel,
         ignoreEvent,
         reportEvent,
         deleteEvent

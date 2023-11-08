@@ -14,7 +14,7 @@ function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path='/' element={<Menu/>}>
-                <Route index element={<EventsPage />}/>
+                <Route index element={<EventsPage/>}/>
                 <Route path='/events' element={<EventsLayout data={theme}/>}>
                     <Route path='ignored' element={<Ignored/>} loader={LoadEvents}/>
                     <Route path='reported' element={<Reported/>} loader={LoadEvents}/>
