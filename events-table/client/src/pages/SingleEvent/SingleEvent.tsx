@@ -20,11 +20,9 @@ const SingleEvent = (props) => {
         openDel,
         handleOpenUpdate,
         handleOpenDel,
-        handleCloseUpdate,
-        handleCloseDel,
         ignoreEvent,
         reportEvent,
-        deleteEvent} = useEvent(props);
+        deleteEvent} = useEvent(props.data);
 
     return (<Grid item xs={10}>
         <div className={classes.eventContainer}>
@@ -54,7 +52,7 @@ const SingleEvent = (props) => {
                         </IconButton>
                         <Modal
                             open={openUpdate}
-                            onClose={handleCloseUpdate}
+                            onClose={handleOpenUpdate}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
                         >
@@ -73,12 +71,12 @@ const SingleEvent = (props) => {
                         </IconButton>
                         <Modal
                             open={openDel}
-                            onClose={handleCloseDel}
+                            onClose={handleOpenDel}
                         >
                             <Box className={classes.modalBox}>
                                 <span>Are you sure?</span>
                                 <Button color="error" onClick={deleteEvent}>Yes</Button>
-                                <Button color="success" onClick={handleCloseDel}>No</Button>
+                                <Button color="success" onClick={handleOpenDel}>No</Button>
                             </Box>
                         </Modal>
                     </div>
