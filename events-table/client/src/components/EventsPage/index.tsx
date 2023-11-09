@@ -15,6 +15,7 @@ const EventsPage = () => {
     const theme = useContext(ThemeContext);
     const classes = useStyles(theme);
     const eventsList = useSelector((state: IRootState) => state?.events);
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(!open);
     useEffect(() => {
