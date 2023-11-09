@@ -8,6 +8,7 @@ import EventsLayout from "./components/Menu/EventsLayout";
 import Reported from "./pages/Reported";
 import EventPage from "./pages/SingleEvent";
 import {ThemeContext} from "./components/Theme";
+import AllEvents from "./pages/AllEvents";
 
 function App() {
     const theme = useContext(ThemeContext);
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<Menu/>}>
                 <Route index element={<EventsPage/>}/>
                 <Route path='/events' element={<EventsLayout data={theme}/>}>
+                    <Route index element={<AllEvents/>}/>
                     <Route path='ignored' element={<Ignored/>} loader={LoadEvents}/>
                     <Route path='reported' element={<Reported/>} loader={LoadEvents}/>
                     <Route path=':id' element={<EventPage/>}/>
