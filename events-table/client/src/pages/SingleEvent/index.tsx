@@ -11,7 +11,6 @@ const EventPage = () => {
     const events = useSelector((state: IRootState) => state.events);
 
     useEffect(() => {
-        console.log('fetch one')
         dispatch<any>(fetchOneEventAction({id: id}));
     }, [])
 
