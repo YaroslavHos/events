@@ -10,9 +10,11 @@ const SearchIndex = (props: ISearch) => {
     const {events, setSearchRes} = props
     const handleSubmit = (e: React.BaseSyntheticEvent) => e.preventDefault()
     const handleSearchChange = (e: React.BaseSyntheticEvent) => {
-        if (!e.target.value) return setSearchRes(events)
-        const resArr = events.filter(event => event.name.includes(e.target.value) ||
-            event.description?.includes(e.target.value))
+        //if (!e.target.value) return setSearchRes(events)
+        const val = e.target.value.toLowerCase()
+        const resArr = events.filter(item => item.name.toLowerCase().includes(val) ||
+            item.description?.toLowerCase().includes(val))
+
         setSearchRes(resArr)
     }
     return (<header>
