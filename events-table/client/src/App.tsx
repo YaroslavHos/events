@@ -1,17 +1,17 @@
-import React, {useContext} from 'react';
-import EventsPage from "./components/EventsPage";
-import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
-import NotFound from "./pages/NotFound";
-import Menu from "./components/Menu";
-import Ignored, {LoadEvents} from "./pages/Ignored";
-import EventsLayout from "./components/Menu/EventsLayout";
-import Reported from "./pages/Reported";
-import EventPage from "./pages/SingleEvent";
-import {ThemeContext} from "./components/Theme";
-import AllEventsPage from "./pages/AllEvents";
+import React, {useContext} from 'react'
+import EventsPage from "./components/EventsPage"
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom"
+import NotFound from "./pages/NotFound"
+import Menu from "./components/Menu"
+import Ignored, {LoadEvents} from "./pages/Ignored"
+import EventsLayout from "./components/Menu/EventsLayout"
+import Reported from "./pages/Reported"
+import EventPage from "./pages/SingleEvent"
+import {ThemeContext} from "./components/Theme"
+import AllEventsPage from "./pages/AllEvents"
 
 function App() {
-    const theme = useContext(ThemeContext);
+    const theme = useContext(ThemeContext)
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path='/' element={<Menu/>}>
@@ -25,10 +25,10 @@ function App() {
                 <Route path='*' element={<NotFound/>}/>
             </Route>
         )
-    );
+    )
     return (
         <RouterProvider router={router}/>
     )
 }
 
-export default App;
+export default App

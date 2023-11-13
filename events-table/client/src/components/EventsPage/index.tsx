@@ -1,27 +1,27 @@
-import React, {useContext, useEffect, useState} from "react";
-import EventForm from "../EventForm";
-import EventsTable from "../EventsTable";
+import React, {useContext, useEffect, useState} from "react"
+import EventForm from "../EventForm"
+import EventsTable from "../EventsTable"
 import useStyles from './styles'
-import { useSelector, useDispatch } from 'react-redux';
-import {fetchEventsAction} from "../../store/events/actions/fetchData";
-import {IRootState} from "../../store/types";
-import moment from "moment";
-import {Box, Button, Modal} from "@mui/material";
-import { ThemeContext } from "../Theme";
+import { useSelector, useDispatch } from 'react-redux'
+import {fetchEventsAction} from "../../store/events/actions/fetchData"
+import {IRootState} from "../../store/types"
+import moment from "moment"
+import {Box, Button, Modal} from "@mui/material"
+import { ThemeContext } from "../Theme"
 //const ws = new WebSocket("ws://localhost:3001/ws")
 
 const EventsPage = () => {
-    const dispatch = useDispatch();
-    const theme = useContext(ThemeContext);
-    const classes = useStyles(theme);
-    const eventsList = useSelector((state: IRootState) => state?.events);
+    const dispatch = useDispatch()
+    const theme = useContext(ThemeContext)
+    const classes = useStyles(theme)
+    const eventsList = useSelector((state: IRootState) => state?.events)
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(!open);
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(!open)
     useEffect(() => {
-        dispatch<any>(fetchEventsAction());
+        dispatch<any>(fetchEventsAction())
     }, [])
-    const loading = eventsList?.isLoading;
+    const loading = eventsList?.isLoading
     if (loading || loading === undefined) return 'Data loading'
 
     // ws.onopen = () => {
@@ -70,4 +70,4 @@ const EventsPage = () => {
     </div>)
 }
 
-export default EventsPage;
+export default EventsPage

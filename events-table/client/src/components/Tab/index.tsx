@@ -1,15 +1,14 @@
-import React from "react";
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import React from "react"
+import Box from '@mui/material/Box'
 
 interface ITabPanel {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
+    children?: React.ReactNode,
+    index: number,
+    value: number,
 }
 
 export default function CustomTabPanel(props: ITabPanel) {
-    const { children, value, index, ...other } = props;
+    const { children, value, index, ...other } = props
 
     return (
         <div

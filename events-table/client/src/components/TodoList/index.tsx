@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 interface IListItem {
     singleItem: string
@@ -16,4 +16,4 @@ const TodoList: React.FC<ITodoList> = (props) => {
 
 }
 
-export default TodoList;
+export default TodoList

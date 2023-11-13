@@ -1,46 +1,46 @@
-import React, {useContext, useState} from "react";
-import useStyles from "./styles";
-import Event from "../Event";
-import {IEvent} from "../../store/events/types";
-import CustomTabPanel from "../Tab";
-import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Grid from "@mui/material/Grid";
-import {IThemePalette, ThemeContext} from "../Theme";
+import React, {useContext, useState} from "react"
+import useStyles from "./styles"
+import Event from "../Event"
+import {IEvent} from "../../store/events/types"
+import CustomTabPanel from "../Tab"
+import Box from "@mui/material/Box"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
+import Grid from "@mui/material/Grid"
+import {ThemeContext} from "../Theme"
 
 interface IEventsTable {
     list: IEvent[]
 }
 const EventsTable: React.FC<IEventsTable> = (props) => {
-    const {list} = props;
+    const {list} = props
     const theme = useContext(ThemeContext)
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(0)
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
-    let mainCount = 0;
-    let ignoredCount = 0;
-    let reportedCount = 0;
-    let mainItems: IEvent[] = [];
-    let reportedItems: IEvent[] = [];
-    let ignoredItems: IEvent[] = [];
+        setValue(newValue)
+    }
+    let mainCount = 0
+    let ignoredCount = 0
+    let reportedCount = 0
+    let mainItems: IEvent[] = []
+    let reportedItems: IEvent[] = []
+    let ignoredItems: IEvent[] = []
     list.forEach((item, index) => {
         if (!item.ignored && !item.reported) {
-            mainItems.push(item);
+            mainItems.push(item)
             mainCount++
         }
         if (item.reported) {
-            reportedItems.push(item);
+            reportedItems.push(item)
             reportedCount++
         }
         if (item.ignored) {
-            ignoredItems.push(item);
+            ignoredItems.push(item)
             ignoredCount++
         }
     });
     const text = theme.theme
-    const classes = useStyles(theme);
+    const classes = useStyles(theme)
     return ( <div data-testid='table-testId' className={classes.tableContainer}>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -69,4 +69,4 @@ const EventsTable: React.FC<IEventsTable> = (props) => {
         </div>
     )
 }
-export default EventsTable;
+export default EventsTable
