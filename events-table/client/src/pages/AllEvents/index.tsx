@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import Search from "../../components/Search";
-import {useDispatch, useSelector} from "react-redux";
-import {IRootState} from "../../store/types";
-import {fetchEventsAction} from "../../store/events/actions/fetchData";
-import Event from "../../components/Event";
+import React, {useEffect, useState} from 'react'
+import Search from "../../components/Search"
+import {useDispatch, useSelector} from "react-redux"
+import {IRootState} from "../../store/types"
+import {fetchEventsAction} from "../../store/events/actions/fetchData"
+import Event from "../../components/Event"
 
 const AllEventsPage = () => {
     const dispatch = useDispatch()
-    const eventsList = useSelector((state: IRootState) => state?.events);
+    const eventsList = useSelector((state: IRootState) => state?.events)
     const [searchRes, setSearchRes] = useState([])
 
     useEffect(() => {
-        dispatch<any>(fetchEventsAction());
+        dispatch<any>(fetchEventsAction())
     }, [])
 
     if (eventsList?.isLoading !== false) return 'Data loading'
@@ -31,4 +31,4 @@ const AllEventsPage = () => {
     );
 };
 
-export default AllEventsPage;
+export default AllEventsPage

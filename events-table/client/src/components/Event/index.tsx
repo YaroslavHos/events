@@ -1,18 +1,18 @@
-import React, {useContext} from "react";
-import useStyles from "./styles";
-import {IEvent} from "../../store/events/types";
-import Switch from "@mui/material/Switch";
-import {Box, Button, FormControlLabel, Grid, IconButton, Modal} from "@mui/material";
-import Stack from '@mui/material/Stack';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CreateIcon from '@mui/icons-material/Create';
-import EventForm from "../EventForm";
-import {ThemeContext} from "../Theme";
-import {Link} from "react-router-dom";
-import useEvent from "./hooks";
+import React, {useContext} from "react"
+import useStyles from "./styles"
+import {IEvent} from "../../store/events/types"
+import Switch from "@mui/material/Switch"
+import {Box, Button, FormControlLabel, Grid, IconButton, Modal} from "@mui/material"
+import Stack from '@mui/material/Stack'
+import DeleteIcon from '@mui/icons-material/Delete'
+import CreateIcon from '@mui/icons-material/Create'
+import EventForm from "../EventForm"
+import {ThemeContext} from "../Theme"
+import {Link} from "react-router-dom"
+import useEvent from "./hooks"
 
 const Event: React.FC<IEvent> = (props) => {
-    const { name, _id, ignored, reported, timestamp, severity, description } = props;
+    const { name, _id, ignored, reported, timestamp, severity, description } = props
     const {ignoredEvent,
         reportedEvent,
         openUpdate,
@@ -21,10 +21,10 @@ const Event: React.FC<IEvent> = (props) => {
         handleOpenDel,
         ignoreEvent,
         reportEvent,
-        deleteEvent} = useEvent(props);
+        deleteEvent} = useEvent(props)
 
-    const theme = useContext(ThemeContext);
-    const classes = useStyles(theme);
+    const theme = useContext(ThemeContext)
+    const classes = useStyles(theme)
 
     // const openConnection = (e:React.BaseSyntheticEvent) => {
     //     const ws = new WebSocket("ws://localhost:3001/ws");
@@ -114,4 +114,4 @@ const Event: React.FC<IEvent> = (props) => {
     )
 }
 
-export default Event;
+export default Event

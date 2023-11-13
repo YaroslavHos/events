@@ -1,5 +1,5 @@
-import React from "react";
-import {Link, Outlet} from "react-router-dom";
+import React from "react"
+import {Link, Outlet} from "react-router-dom"
 
 const EventsLayout = (props: any) => {
     const {data} = props
@@ -14,4 +14,4 @@ const EventsLayout = (props: any) => {
     )
 }
 
-export default EventsLayout;
+export default EventsLayout

@@ -1,9 +1,9 @@
-import React, {useContext, useState} from "react";
-import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
-import {createEventAction, updateDataAction} from "../../store/events/actions/fetchData";
-import {useDispatch} from "react-redux";
-import useStyles from "./styles";
-import {ThemeContext} from "../Theme";
+import React, {useContext, useState} from "react"
+import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material"
+import {createEventAction, updateDataAction} from "../../store/events/actions/fetchData"
+import {useDispatch} from "react-redux"
+import useStyles from "./styles"
+import {ThemeContext} from "../Theme"
 
 interface IEventForm {
     actionType?: string,
@@ -11,17 +11,17 @@ interface IEventForm {
 }
 
 const EventForm: React.FC<IEventForm> = (props) => {
-    const {actionType = 'insert', additionalData} = props;
+    const {actionType = 'insert', additionalData} = props
     const theme = useContext(ThemeContext)
     const [formValues, setFormValues] = useState({})
     const [severity, setSeverity] = useState('High')
-    const [error, setError] = React.useState(false);
-    const dispatch = useDispatch();
+    const [error, setError] = React.useState(false)
+    const dispatch = useDispatch()
     const classes = useStyles(theme)
     const text = theme.theme;
     const submitEvent = (e: React.BaseSyntheticEvent) => {
-        e.preventDefault();
-        const timestamp = new Date().getTime() / 1000;
+        e.preventDefault()
+        const timestamp = new Date().getTime() / 1000
         let data = formValues
         if (actionType === 'insert') {
             dispatch<any>(createEventAction({...data, timestamp: timestamp}))
@@ -31,16 +31,16 @@ const EventForm: React.FC<IEventForm> = (props) => {
     }
 
     const onChangeWrapper = (e: React.BaseSyntheticEvent) => {
-        const { value, name } = e.target;
+        const { value, name } = e.target
         setFormValues({...formValues, [name]: value})
     }
 
     const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSeverity((e.target as HTMLInputElement).value)
-        const { name, checked, value } = e.target;
-        checked && setFormValues({...formValues, [name]: value});
-        setError(false);
-    };
+        const { name, checked, value } = e.target
+        checked && setFormValues({...formValues, [name]: value})
+        setError(false)
+    }
 
     return (
         <div className="form">
@@ -90,4 +90,4 @@ const EventForm: React.FC<IEventForm> = (props) => {
     )
 }
 
-export default EventForm;
+export default EventForm

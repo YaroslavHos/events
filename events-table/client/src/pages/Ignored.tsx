@@ -1,11 +1,11 @@
-import React from "react";
-import {useLoaderData} from "react-router-dom";
-import Event from "../components/Event";
-import axios from "axios";
-import {Box, Grid} from "@mui/material";
+import React from "react"
+import {useLoaderData} from "react-router-dom"
+import Event from "../components/Event"
+import axios from "axios"
+import {Box, Grid} from "@mui/material"
 
 const Ignored = () => {
-    const outlet = useLoaderData();
+    const outlet = useLoaderData()
 
     return (<Box sx={{ width: '100%' }}>
         <Grid container
@@ -19,7 +19,7 @@ const Ignored = () => {
         </Grid>
     </Box>)
 }
-export default Ignored;
+export default Ignored
 
 export function LoadEvents() {
     return axios.get("http://localhost:3001/events").then((response) => {

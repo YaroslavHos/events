@@ -1,5 +1,5 @@
-import React from 'react';
-import {IEvent} from "../../store/events/types";
+import React from 'react'
+import {IEvent} from "../../store/events/types"
 
 interface ISearch {
     events: IEvent[],
@@ -25,4 +25,4 @@ const SearchIndex = (props: ISearch) => {
     </header>)
 }
 
-export default SearchIndex;
+export default SearchIndex

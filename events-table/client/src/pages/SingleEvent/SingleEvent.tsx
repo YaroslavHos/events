@@ -1,18 +1,18 @@
-import React from "react";
-import {Link, useOutletContext} from "react-router-dom";
-import Stack from "@mui/material/Stack";
-import {Box, Button, FormControlLabel, Grid, IconButton, Modal} from "@mui/material";
-import Switch from "@mui/material/Switch";
-import CreateIcon from "@mui/icons-material/Create";
-import EventForm from "../../components/EventForm";
-import DeleteIcon from "@mui/icons-material/Delete";
-import useStyles from "../../components/Event/styles";
-import useEvent from "../../components/Event/hooks";
+import React from "react"
+import {Link, useOutletContext} from "react-router-dom"
+import Stack from "@mui/material/Stack"
+import {Box, Button, FormControlLabel, Grid, IconButton, Modal} from "@mui/material"
+import Switch from "@mui/material/Switch"
+import CreateIcon from "@mui/icons-material/Create"
+import EventForm from "../../components/EventForm"
+import DeleteIcon from "@mui/icons-material/Delete"
+import useStyles from "../../components/Event/styles"
+import useEvent from "../../components/Event/hooks"
 
 const SingleEvent = (props) => {
-    const {_id, name, severity, description, ignored, reported, timestamp} = props.data;
+    const {_id, name, severity, description, ignored, reported, timestamp} = props.data
     const outlet = useOutletContext()
-    const classes = useStyles(outlet.theme);
+    const classes = useStyles(outlet.theme)
 
     const {ignoredEvent,
         reportedEvent,
@@ -22,7 +22,7 @@ const SingleEvent = (props) => {
         handleOpenDel,
         ignoreEvent,
         reportEvent,
-        deleteEvent} = useEvent(props.data);
+        deleteEvent} = useEvent(props.data)
 
     return (<Grid item xs={10}>
         <div className={classes.eventContainer}>
@@ -94,4 +94,4 @@ const SingleEvent = (props) => {
     </Grid>)
 }
 
-export default SingleEvent;
+export default SingleEvent
